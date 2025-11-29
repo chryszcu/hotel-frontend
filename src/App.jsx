@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import CustomerApp from './pages/CustomerApp'
 import EmployeeApp from './pages/EmployeeApp'
-import './App.css'
 
 function App() {
   const [userType, setUserType] = useState('customer')
