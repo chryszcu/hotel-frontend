@@ -9,7 +9,7 @@ function App() {
   // Sprawdzaj URL przy załadowaniu
   useEffect(() => {
     const path = window.location.pathname
-    if (path.includes('/employee')) {
+    if (path.includes('/admin'))  {
       setUserType('employee')
     }
   }, [])
