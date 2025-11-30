@@ -337,7 +337,7 @@ const ExampleContent = ({ selected, setSelected }) => {
     <div className="h-screen w-full p-8 text-slate-100">
       {selected === "DashBoard" && (
         <section>
-          <h1 className="mt-20 text-3xl font-bold mb-6">DashBoard</h1>
+          <h1 className="text-3xl font-bold mb-6">DashBoard</h1>
 
           {/* GRID Z KAFELKAMI */}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12 mb-8">
