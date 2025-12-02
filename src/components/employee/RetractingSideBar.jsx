@@ -223,9 +223,12 @@ const ToggleClose = ({ open, setOpen }) => {
 const ExampleContent = ({ selected, setSelected }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [memberType, setMemberType] = useState("Gość");
-  no
+
   return (
     <div className="h-screen w-full p-8 text-slate-100">
+
+      {selected === "Rezerwacja" && <AdminReservation />}
+
       {selected === "DashBoard" && (
         <section>
           <h1 className="text-3xl font-bold mb-6">DashBoard</h1>
@@ -294,8 +297,6 @@ const ExampleContent = ({ selected, setSelected }) => {
           <p>Tu będą wykresy, tabela przychodów, podsumowanie miesiąca.</p>
         </div>
       )}
-
-      {selected === "Rezerwacja" && <AdminReservation />}
 
       {selected === "Lista pokoi" && (
         <section>
