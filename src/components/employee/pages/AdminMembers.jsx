@@ -1,9 +1,79 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useTableSearchSort } from "../hook/useTableSearchSort";
+
+const membersData = [
+  {
+    id: 1,
+    name: "Dawid Dąbrowski",
+    email: "dawid.dabrowski@example.com",
+    type: "Gość",
+    status: "Aktywny",
+    lastStay: "12.10.2025 – 15.10.2025",
+    reservations: 5,
+  },
+  {
+    id: 2,
+    name: "Agata Bronk",
+    email: "agata.bronk@example.com",
+    type: "Gość",
+    status: "Oczekuje",
+    lastStay: "Zaplanowany: 24.11.2025",
+    reservations: 2,
+  },
+  {
+    id: 3,
+    name: "Jakub Chryszczanowicz",
+    email: "admin@example.com",
+    type: "Admin",
+    status: "Wewnętrzny",
+    lastStay: "–",
+    reservations: "—",
+  },
+];
+
+const statusColors = {
+  Aktywny: "bg-emerald-500/15 text-emerald-400",
+  Oczekuje: "bg-amber-500/15 text-amber-400",
+  Wewnętrzny: "bg-sky-500/15 text-sky-400",
+};
+
+const typeFilters = [
+  { label: "Wszyscy", value: "Wszyscy" },
+  { label: "Goście", value: "Gość" },
+  { label: "Pracownicy", value: "Pracownik" },
+  { label: "Admini", value: "Admin" },
+];
 
 const AdminMembers = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [memberType, setMemberType] = useState("Gość");
+  const [typeFilter, setTypeFilter] = useState("Wszyscy");
+
+  const {
+    search,
+    setSearch,
+    handleSort,
+    data: sortedData,
+    renderSortIcon,
+  } = useTableSearchSort({
+    data: membersData,
+    searchableFields: [
+      "name",
+      "email",
+      "type",
+      "status",
+      "lastStay",
+      "reservations",
+    ],
+    defaultSortKey: "name",
+    defaultSortDirection: "asc",
+  });
+
+  const filteredMembers =
+    typeFilter === "Wszyscy"
+      ? sortedData
+      : sortedData.filter((m) => m.type === typeFilter);
 
   return (
     <section>
@@ -30,22 +100,25 @@ const AdminMembers = () => {
             type="text"
             placeholder="Szukaj po imieniu, nazwisku lub e-mailu..."
             className="w-full rounded-lg bg-slate-800 border border-slate-700 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
 
-        <div className="flex gap-2 text-sm">
-          <button className="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 hover:bg-slate-700 transition">
-            Wszyscy
-          </button>
-          <button className="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 hover:bg-slate-700 transition">
-            Goście
-          </button>
-          <button className="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 hover:bg-slate-700 transition">
-            Pracownicy
-          </button>
-          <button className="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 hover:bg-slate-700 transition">
-            Admini
-          </button>
+        <div className="flex flex-wrap gap-2 text-sm">
+          {typeFilters.map((t) => (
+            <button
+              key={t.value}
+              onClick={() => setTypeFilter(t.value)}
+              className={`px-3 py-1.5 rounded-lg border transition ${
+                typeFilter === t.value
+                  ? "bg-indigo-600 border-indigo-600 text-white"
+                  : "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700"
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -54,66 +127,112 @@ const AdminMembers = () => {
         <table className="min-w-full text-sm">
           <thead className="bg-slate-800">
             <tr className="text-left text-slate-300">
-              <th className="px-4 py-3">Imię i nazwisko</th>
-              <th className="px-4 py-3">E-mail</th>
-              <th className="px-4 py-3">Typ</th>
-              <th className="px-4 py-3">Status</th>
-              <th className="px-4 py-3">Ostatni pobyt</th>
-              <th className="px-4 py-3 text-right">Rezerwacje</th>
+              <th className="px-4 py-3">
+                <button
+                  type="button"
+                  onClick={() => handleSort("name")}
+                  className="inline-flex items-center gap-1 hover:text-white"
+                >
+                  Imię i nazwisko
+                  {renderSortIcon("name")}
+                </button>
+              </th>
+              <th className="px-4 py-3">
+                <button
+                  type="button"
+                  onClick={() => handleSort("email")}
+                  className="inline-flex items-center gap-1 hover:text-white"
+                >
+                  E-mail
+                  {renderSortIcon("email")}
+                </button>
+              </th>
+              <th className="px-4 py-3">
+                <button
+                  type="button"
+                  onClick={() => handleSort("type")}
+                  className="inline-flex items-center gap-1 hover:text-white"
+                >
+                  Typ
+                  {renderSortIcon("type")}
+                </button>
+              </th>
+              <th className="px-4 py-3">
+                <button
+                  type="button"
+                  onClick={() => handleSort("status")}
+                  className="inline-flex items-center gap-1 hover:text-white"
+                >
+                  Status
+                  {renderSortIcon("status")}
+                </button>
+              </th>
+              <th className="px-4 py-3">
+                <button
+                  type="button"
+                  onClick={() => handleSort("lastStay")}
+                  className="inline-flex items-center gap-1 hover:text-white"
+                >
+                  Ostatni pobyt
+                  {renderSortIcon("lastStay")}
+                </button>
+              </th>
+              <th className="px-4 py-3 text-right">
+                <button
+                  type="button"
+                  onClick={() => handleSort("reservations")}
+                  className="inline-flex items-center gap-1 hover:text-white"
+                >
+                  Rezerwacje
+                  {renderSortIcon("reservations")}
+                </button>
+              </th>
             </tr>
           </thead>
+
           <tbody>
-            {/* Wiersz 1 */}
-            <tr className="border-t border-slate-700/60 hover:bg-slate-800/70 transition">
-              <td className="px-4 py-3 text-slate-100">Dawid Dąbrowski</td>
-              <td className="px-4 py-3 text-slate-300">
-                dawid.dabrowski@example.com
-              </td>
-              <td className="px-4 py-3 text-slate-300">Gość</td>
-              <td className="px-4 py-3">
-                <span className="inline-flex items-center rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-xs font-medium text-emerald-400">
-                  Aktywny
-                </span>
-              </td>
-              <td className="px-4 py-3 text-slate-300">
-                12.10.2025 – 15.10.2025
-              </td>
-              <td className="px-4 py-3 text-right text-slate-100">5</td>
-            </tr>
-
-            {/* Wiersz 2 */}
-            <tr className="border-t border-slate-700/60 hover:bg-slate-800/70 transition">
-              <td className="px-4 py-3 text-slate-100">Agata Bronk</td>
-              <td className="px-4 py-3 text-slate-300">
-                agata.bronk@example.com
-              </td>
-              <td className="px-4 py-3 text-slate-300">Gość</td>
-              <td className="px-4 py-3">
-                <span className="inline-flex items-center rounded-full bg-amber-500/15 px-2.5 py-0.5 text-xs font-medium text-amber-400">
-                  Oczekuje
-                </span>
-              </td>
-              <td className="px-4 py-3 text-slate-300">
-                Zaplanowany: 24.11.2025
-              </td>
-              <td className="px-4 py-3 text-right text-slate-100">2</td>
-            </tr>
-
-            {/* Wiersz 3 */}
-            <tr className="border-t border-slate-700/60 hover:bg-slate-800/70 transition">
-              <td className="px-4 py-3 text-slate-100">
-                Jakub Chryszczanowicz
-              </td>
-              <td className="px-4 py-3 text-slate-300">admin@example.com</td>
-              <td className="px-4 py-3 text-slate-300">Admin</td>
-              <td className="px-4 py-3">
-                <span className="inline-flex items-center rounded-full bg-sky-500/15 px-2.5 py-0.5 text-xs font-medium text-sky-400">
-                  Wewnętrzny
-                </span>
-              </td>
-              <td className="px-4 py-3 text-slate-300">–</td>
-              <td className="px-4 py-3 text-right text-slate-100">—</td>
-            </tr>
+            {filteredMembers.length > 0 ? (
+              filteredMembers.map((member) => (
+                <tr
+                  key={member.id}
+                  className="border-t border-slate-700/60 hover:bg-slate-800/70 transition"
+                >
+                  <td className="px-4 py-3 text-slate-100">
+                    {member.name}
+                  </td>
+                  <td className="px-4 py-3 text-slate-300">
+                    {member.email}
+                  </td>
+                  <td className="px-4 py-3 text-slate-300">
+                    {member.type}
+                  </td>
+                  <td className="px-4 py-3">
+                    <span
+                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                        statusColors[member.status] || "bg-slate-700 text-slate-200"
+                      }`}
+                    >
+                      {member.status}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-slate-300">
+                    {member.lastStay}
+                  </td>
+                  <td className="px-4 py-3 text-right text-slate-100">
+                    {member.reservations}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr className="border-t border-slate-700/60">
+                <td
+                  colSpan="6"
+                  className="px-4 py-6 text-center text-slate-400 italic"
+                >
+                  Brak wyników.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

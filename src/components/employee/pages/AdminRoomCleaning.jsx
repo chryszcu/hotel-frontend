@@ -1,26 +1,11 @@
 import React, { useState } from "react";
+import { useTableSearchSort } from "../hook/useTableSearchSort";
 
 const roomsData = [
-  {
-    id: 5,
-    people: "andrzej",
-    status: "Wolny",
-  },
-  {
-    id: 6,
-    people: "zdzisalwa",
-    status: "Sprzątanie",
-  },
-  {
-    id: 7,
-    people: "katarzyna",
-    status: "Oczekujący",
-  },
-  {
-    id: 8,
-    people: "rysio",
-    status: "Zajęty",
-  },
+  { id: 5, people: "andrzej", status: "Wolny" },
+  { id: 6, people: "zdzisalwa", status: "Sprzątanie" },
+  { id: 7, people: "katarzyna", status: "Oczekujący" },
+  { id: 8, people: "rysio", status: "Zajęty" },
 ];
 
 const statusColors = {
@@ -31,19 +16,25 @@ const statusColors = {
 };
 
 export default function AdminRoomCleaning() {
-  const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("Wszystkie");
 
-  const filteredRooms = roomsData.filter((room) => {
-    const matchesSearch =
-    //   room.name.toLowerCase().includes(search.toLowerCase()) ||
-      room.id.toString().includes(search);
-
-    const matchesFilter =
-      filter === "Wszystkie" ? true : room.status === filter;
-
-    return matchesSearch && matchesFilter;
+  const {
+    search,
+    setSearch,
+    handleSort,
+    data: sortedData,
+    renderSortIcon,
+  } = useTableSearchSort({
+    data: roomsData,
+    searchableFields: ["id", "people", "status"],
+    defaultSortKey: "id",
+    defaultSortDirection: "asc",
   });
+
+  const filteredRooms =
+    filter === "Wszystkie"
+      ? sortedData
+      : sortedData.filter((room) => room.status === filter);
 
   return (
     <section>
@@ -61,7 +52,7 @@ export default function AdminRoomCleaning() {
         <div className="relative w-full md:w-1/3">
           <input
             type="text"
-            placeholder="Szukaj pokoju"
+            placeholder="Szukaj pokoju lub pracownika..."
             className="w-full rounded-lg bg-slate-800 border border-slate-700 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -93,9 +84,35 @@ export default function AdminRoomCleaning() {
         <table className="min-w-full text-sm">
           <thead className="bg-slate-800">
             <tr className="text-left text-slate-300">
-              <th className="px-4 py-3">Nr pokoju</th>
-              <th className="px-4 py-3">Przypisany pracownik</th>
-              <th className="px-4 py-3">Status</th>
+              <th className="px-4 py-3">
+                <button
+                  onClick={() => handleSort("id")}
+                  className="inline-flex items-center gap-1 hover:text-white"
+                >
+                  Nr pokoju
+                  {renderSortIcon("id")}
+                </button>
+              </th>
+
+              <th className="px-4 py-3">
+                <button
+                  onClick={() => handleSort("people")}
+                  className="inline-flex items-center gap-1 hover:text-white"
+                >
+                  Przypisany pracownik
+                  {renderSortIcon("people")}
+                </button>
+              </th>
+
+              <th className="px-4 py-3">
+                <button
+                  onClick={() => handleSort("status")}
+                  className="inline-flex items-center gap-1 hover:text-white"
+                >
+                  Status
+                  {renderSortIcon("status")}
+                </button>
+              </th>
             </tr>
           </thead>
 
@@ -110,7 +127,9 @@ export default function AdminRoomCleaning() {
                   <td className="px-4 py-3 text-slate-100">{room.people}</td>
                   <td className="px-4 py-3">
                     <span
-                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusColors[room.status]}`}
+                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                        statusColors[room.status]
+                      }`}
                     >
                       {room.status}
                     </span>
@@ -120,7 +139,7 @@ export default function AdminRoomCleaning() {
             ) : (
               <tr className="border-t border-slate-700/60">
                 <td
-                  colSpan="5"
+                  colSpan="3"
                   className="px-4 py-6 text-center text-slate-400 italic"
                 >
                   Brak wyników.
