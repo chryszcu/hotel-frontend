@@ -1,21 +1,17 @@
-// src/pages/EmployeeApp.jsx
-import { useState } from "react"
-import { Example as RetractingSideBar } from "../components/employee/RetractingSideBar"
-import AdminLogin from "../components/employee/Auth/AdminLogin";
- // bo AdminLogin.jsx jest w tym samym folderze pages
+import { useState } from "react";
+import AdminLogin from "../components/employee/Auth/AdminLogin"
+import AdminPanel from "../components/employee/AdminPanel"; // albo zmień nazwę pliku na AdminPanel.jsx
 
 export default function EmployeeApp() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // jeśli nie zalogowany → pokaż ekran logowania
   if (!isLoggedIn) {
-    return <AdminLogin onLoginSuccess={() => setIsLoggedIn(true)} />
+    return <AdminLogin onLoginSuccess={() => setIsLoggedIn(true)} />;
   }
 
-  // jeśli zalogowany → pokaż panel admina
   return (
     <div className="min-h-screen">
-      <RetractingSideBar />
+      <AdminPanel />
     </div>
-  )
+  );
 }
