@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import BackButton from "../components/BackButton";
 
-export default function AdminSpaReservation() {
+export default function AdminSpaReservation({ onBack }) {
   const [form, setForm] = useState({
     clientName: "",
     phone: "",
@@ -11,7 +12,7 @@ export default function AdminSpaReservation() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm(prev => ({ ...prev, [name]: value }));
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
@@ -22,8 +23,15 @@ export default function AdminSpaReservation() {
 
   return (
     <div className="p-8 text-slate-100">
-      <h1 className="text-3xl font-bold mb-6">Rezerwacja SPA</h1>
-
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-3xl font-bold">Rezerwacja SPA</h1>
+          <p className="text-sm text-slate-400">
+            Wybierz termin i rodzaj usługi.
+          </p>
+        </div>
+        <BackButton onClick={onBack} label="Powrót" />
+      </div>
       <form
         onSubmit={handleSubmit}
         className="bg-slate-800/70 border border-slate-700 rounded-xl p-8 space-y-4"

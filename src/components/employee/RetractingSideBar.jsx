@@ -16,7 +16,7 @@ import AdminReservationSelector from "./pages/AdminReservationSelector ";
 
 export const Example = () => {
   const [selected, setSelected] = useState("DashBoard");
-  
+
   return (
     <div className="flex bg-slate-900">
       <Sidebar selected={selected} setSelected={setSelected} />
@@ -110,7 +110,11 @@ const Option = ({ Icon, title, selected, setSelected, open, notifs }) => {
     <motion.button
       layout
       onClick={() => setSelected(title)}
-      className={`relative flex h-10 w-full items-center rounded-md transition-colors ${selected === title ? "bg-indigo-100 text-indigo-800" : "text-slate-500 hover:bg-slate-100"}`}
+      className={`relative flex h-10 w-full items-center rounded-md transition-colors ${
+        selected === title
+          ? "bg-indigo-100 text-indigo-800"
+          : "text-slate-500 hover:bg-slate-100"
+      }`}
     >
       <motion.div
         layout
@@ -161,7 +165,9 @@ const TitleSection = ({ open }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.125 }}
             >
-              <span className="block text-xs font-semibold text-slate-400">Chryszczu</span>
+              <span className="block text-xs font-semibold text-slate-400">
+                Chryszczu
+              </span>
               <span className="block text-xs text-slate-500">Admin</span>
             </motion.div>
           )}
@@ -186,7 +192,6 @@ const Logo = () => {
     </motion.div>
   );
 };
-
 
 const ToggleClose = ({ open, setOpen }) => {
   return (
@@ -226,7 +231,6 @@ const ExampleContent = ({ selected, setSelected }) => {
 
   return (
     <div className="h-screen w-full p-8 text-slate-100">
-
       {selected === "Rezerwacja" && <AdminReservationSelector />}
 
       {selected === "DashBoard" && (
@@ -236,9 +240,9 @@ const ExampleContent = ({ selected, setSelected }) => {
           {/* GRID Z KAFELKAMI */}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12 mb-8">
             {/* Kafelek 1 */}
-            <div 
-            onClick={() => setSelected("Lista pokoi")}
-            className="bg-slate-800 rounded-xl p-16 shadow-lg border border-slate-700 cursor-pointer hover:bg-slate-700 transition"
+            <div
+              onClick={() => setSelected("Lista pokoi")}
+              className="bg-slate-800 rounded-xl p-16 shadow-lg border border-slate-700 cursor-pointer hover:bg-slate-700 transition"
             >
               <p className="text-l text-slate-400 cente">Obłożenie pokoi</p>
               <p className="mt-2 text-4xl font-bold text-indigo-400">82%</p>
@@ -251,17 +255,24 @@ const ExampleContent = ({ selected, setSelected }) => {
               className="bg-slate-800 rounded-xl p-16 shadow-lg border border-slate-700 cursor-pointer hover:bg-slate-700 transition"
             >
               <p className="text-l text-slate-400">Dzisiejszy przychód</p>
-              <p className="mt-2 text-4xl font-bold text-emerald-400">12 350 zł</p>
-              <p className="mt-1 text-xs text-slate-400">z rezerwacji online i na recepcji</p>
+              <p className="mt-2 text-4xl font-bold text-emerald-400">
+                12 350 zł
+              </p>
+              <p className="mt-1 text-xs text-slate-400">
+                z rezerwacji online i na recepcji
+              </p>
             </div>
 
             {/* Kafelek 3 */}
-            <div 
-            onClick={() => setSelected("Członkowie")}
-            className="bg-slate-800 rounded-xl p-16 shadow-lg border border-slate-700 cursor-pointer hover:bg-slate-700 transition">
+            <div
+              onClick={() => setSelected("Członkowie")}
+              className="bg-slate-800 rounded-xl p-16 shadow-lg border border-slate-700 cursor-pointer hover:bg-slate-700 transition"
+            >
               <p className="text-l text-slate-400">Goście w hotelu</p>
               <p className="mt-2 text-4xl font-bold text-sky-400">74</p>
-              <p className="mt-1 text-xs text-slate-400">z 90 dostępnych miejsc</p>
+              <p className="mt-1 text-xs text-slate-400">
+                z 90 dostępnych miejsc
+              </p>
             </div>
 
             {/* Kafelek 4 */}
@@ -275,9 +286,12 @@ const ExampleContent = ({ selected, setSelected }) => {
           {/* Dalsza część dashboardu – np. tabelki / wykresy */}
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-12">
             <div className="xl:col-span-2 bg-slate-800 rounded-xl p-16 border border-slate-700">
-              <h2 className="text-2xl font-semibold mb-2">Dzisiejsze operacje</h2>
+              <h2 className="text-2xl font-semibold mb-2">
+                Dzisiejsze operacje
+              </h2>
               <p className="text-l text-slate-400">
-                Tu możesz później dodać listę dzisiejszych przyjazdów i wyjazdów.
+                Tu możesz później dodać listę dzisiejszych przyjazdów i
+                wyjazdów.
               </p>
             </div>
             <div className="bg-slate-800 rounded-xl p-16 border border-slate-700">
@@ -350,7 +364,9 @@ const ExampleContent = ({ selected, setSelected }) => {
               <tbody>
                 <tr className="border-t border-slate-700/60 hover:bg-slate-800/70 transition">
                   <td className="px-4 py-3 text-slate-100">5</td>
-                  <td className="px-4 py-3 text-slate-300">Pokój dwuosobowy classic</td>
+                  <td className="px-4 py-3 text-slate-300">
+                    Pokój dwuosobowy classic
+                  </td>
                   <td className="px-4 py-3 text-slate-100">2</td>
                   <td className="px-4 py-3 text-slate-300">Standard</td>
                   <td className="px-4 py-3">
@@ -362,19 +378,23 @@ const ExampleContent = ({ selected, setSelected }) => {
 
                 <tr className="border-t border-slate-700/60 hover:bg-slate-800/70 transition">
                   <td className="px-4 py-3 text-slate-100">6</td>
-                  <td className="px-4 py-3 text-slate-300">Pokój czteroosobowy deluxe</td>
+                  <td className="px-4 py-3 text-slate-300">
+                    Pokój czteroosobowy deluxe
+                  </td>
                   <td className="px-4 py-3 text-slate-100">4</td>
                   <td className="px-4 py-3 text-slate-300">Deluxe</td>
                   <td className="px-4 py-3">
                     <span className="inline-flex items-center rounded-full bg-amber-500/15 px-2.5 py-0.5 text-xs font-medium text-amber-400">
-                      Sprzątanie 
+                      Sprzątanie
                     </span>
                   </td>
                 </tr>
 
                 <tr className="border-t border-slate-700/60 hover:bg-slate-800/70 transition">
                   <td className="px-4 py-3 text-slate-100">7</td>
-                  <td className="px-4 py-3 text-slate-300">Apartament pałacowy czteroosobowy</td>
+                  <td className="px-4 py-3 text-slate-300">
+                    Apartament pałacowy czteroosobowy
+                  </td>
                   <td className="px-4 py-3 text-slate-100">4</td>
                   <td className="px-4 py-3 text-slate-300">Apartament</td>
                   <td className="px-4 py-3">
@@ -463,33 +483,45 @@ const ExampleContent = ({ selected, setSelected }) => {
               <tbody>
                 <tr className="border-t border-slate-700/60 hover:bg-slate-800/70 transition">
                   <td className="px-4 py-3 text-slate-100">Dawid Dąbrowski</td>
-                  <td className="px-4 py-3 text-slate-300">dawid.dabrowski@example.com</td>
+                  <td className="px-4 py-3 text-slate-300">
+                    dawid.dabrowski@example.com
+                  </td>
                   <td className="px-4 py-3 text-slate-300">Gość</td>
                   <td className="px-4 py-3">
                     <span className="inline-flex items-center rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-xs font-medium text-emerald-400">
                       Aktywny
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-slate-300">12.10.2025 – 15.10.2025</td>
+                  <td className="px-4 py-3 text-slate-300">
+                    12.10.2025 – 15.10.2025
+                  </td>
                   <td className="px-4 py-3 text-right text-slate-100">5</td>
                 </tr>
 
                 <tr className="border-t border-slate-700/60 hover:bg-slate-800/70 transition">
                   <td className="px-4 py-3 text-slate-100">Agata Bronk</td>
-                  <td className="px-4 py-3 text-slate-300">agata.bronk@example.com</td>
+                  <td className="px-4 py-3 text-slate-300">
+                    agata.bronk@example.com
+                  </td>
                   <td className="px-4 py-3 text-slate-300">Gość</td>
                   <td className="px-4 py-3">
                     <span className="inline-flex items-center rounded-full bg-amber-500/15 px-2.5 py-0.5 text-xs font-medium text-amber-400">
                       Oczekuje
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-slate-300">Zaplanowany: 24.11.2025</td>
+                  <td className="px-4 py-3 text-slate-300">
+                    Zaplanowany: 24.11.2025
+                  </td>
                   <td className="px-4 py-3 text-right text-slate-100">2</td>
                 </tr>
 
                 <tr className="border-t border-slate-700/60 hover:bg-slate-800/70 transition">
-                  <td className="px-4 py-3 text-slate-100">Jakub Chryszczanowicz</td>
-                  <td className="px-4 py-3 text-slate-300">admin@example.com</td>
+                  <td className="px-4 py-3 text-slate-100">
+                    Jakub Chryszczanowicz
+                  </td>
+                  <td className="px-4 py-3 text-slate-300">
+                    admin@example.com
+                  </td>
                   <td className="px-4 py-3 text-slate-300">Admin</td>
                   <td className="px-4 py-3">
                     <span className="inline-flex items-center rounded-full bg-sky-500/15 px-2.5 py-0.5 text-xs font-medium text-sky-400">
@@ -506,7 +538,6 @@ const ExampleContent = ({ selected, setSelected }) => {
       )}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -552,9 +583,7 @@ const ExampleContent = ({ selected, setSelected }) => {
                 Anuluj
               </button>
 
-              <button
-                className="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 transition"
-              >
+              <button className="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 transition">
                 Zapisz
               </button>
             </div>
