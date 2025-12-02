@@ -10,9 +10,11 @@ import {
   FiTag,
   FiUsers,
 } from "react-icons/fi";
+import { MdCleaningServices } from "react-icons/md";
 import { motion } from "framer-motion";
 import { BiBed } from "react-icons/bi";
 import AdminReservationSelector from "./pages/AdminReservationSelector ";
+import AdminRoomCleaning from "./pages/AdminRoomCleaning";
 
 export const Example = () => {
   const [selected, setSelected] = useState("DashBoard");
@@ -56,8 +58,8 @@ const Sidebar = ({ selected, setSelected }) => {
           open={open}
         />
         <Option
-          Icon={FiDollarSign}
-          title="Zarobki"
+          Icon={MdCleaningServices}
+          title="Sprzątanie"
           selected={selected}
           setSelected={setSelected}
           open={open}
@@ -77,20 +79,20 @@ const Sidebar = ({ selected, setSelected }) => {
           setSelected={setSelected}
           open={open}
         />
-        <Option
+        {/* <Option
           Icon={FiTag}
           title="Tags"
           selected={selected}
           setSelected={setSelected}
           open={open}
-        />
-        <Option
+        /> */}
+        {/* <Option
           Icon={FiBarChart}
           title="Analiza"
           selected={selected}
           setSelected={setSelected}
           open={open}
-        />
+        /> */}
         <Option
           Icon={FiUsers}
           title="Członkowie"
@@ -251,7 +253,7 @@ const ExampleContent = ({ selected, setSelected }) => {
 
             {/* Kafelek 2 */}
             <div
-              onClick={() => setSelected("Zarobki")}
+              onClick={() => setSelected("Sprzątanie")}
               className="bg-slate-800 rounded-xl p-16 shadow-lg border border-slate-700 cursor-pointer hover:bg-slate-700 transition"
             >
               <p className="text-l text-slate-400">Dzisiejszy przychód</p>
@@ -305,12 +307,7 @@ const ExampleContent = ({ selected, setSelected }) => {
         </section>
       )}
 
-      {selected === "Zarobki" && (
-        <div>
-          <h1 className="text-2xl font-bold mb-4">Zarobki</h1>
-          <p>Tu będą wykresy, tabela przychodów, podsumowanie miesiąca.</p>
-        </div>
-      )}
+      {selected === "Sprzątanie" && <AdminRoomCleaning/>}
 
       {selected === "Lista pokoi" && (
         <section>
