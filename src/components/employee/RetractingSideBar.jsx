@@ -12,7 +12,7 @@ import {
 } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { BiBed } from "react-icons/bi";
-import AdminReservation from "./pages/AdminReservation";
+import AdminReservationSelector from "./pages/AdminReservationSelector ";
 
 export const Example = () => {
   const [selected, setSelected] = useState("DashBoard");
@@ -227,7 +227,7 @@ const ExampleContent = ({ selected, setSelected }) => {
   return (
     <div className="h-screen w-full p-8 text-slate-100">
 
-      {selected === "Rezerwacja" && <AdminReservation />}
+      {selected === "Rezerwacja" && <AdminReservationSelector />}
 
       {selected === "DashBoard" && (
         <section>
