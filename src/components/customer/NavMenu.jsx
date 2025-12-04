@@ -1,17 +1,17 @@
 export default function Navbar({ onNavigate, onBookNow }) {
   return (
     <header className="w-full bg-slate-900/80 backdrop-blur-md fixed top-0 left-0 z-50">
-      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-1.5">
 
         {/* Logo */}
         <div 
-        className="flex justify-center mb-4 cursor-pointer"
+        className="flex justify-center cursor-pointer"
         onClick={() => onNavigate('home')}
 >
         <img
           src="src/components/logo.png"
           alt="logo"
-          className="w-35 h-30 rounded-md"
+          className="w-25 h-20 rounded-md"
         />
         
         
