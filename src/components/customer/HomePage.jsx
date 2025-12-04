@@ -1,7 +1,10 @@
 // src/components/customer/HomePage.jsx
-export default function HomePage({ }) {
+export default function HomePage( { }) {
   return (
-    <section className="h-screen w-full flex items-center justify-center bg-linear-to-br from-slate-900 via-purple-900 to-slate-900">
+    <section className="
+    h-screen w-full flex items-center justify-center bg-linear-to-br from-slate-900 via-purple-900 to-slate-900
+    
+    ">
       <div className="text-center px-4 max-w-4xl">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-linear-to-r from-white to-slate-300 bg-clip-text text-transparent">
           Luksusowy Hotel
