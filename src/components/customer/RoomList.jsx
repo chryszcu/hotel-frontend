@@ -34,7 +34,7 @@ export default function RoomList({ onSelectRoom, onBack }) {
   const [selectedRoom, setSelectedRoom] = useState(null)
 
   return (
-    <section className="min-h-screen bg-slate-900 py-12 px-4 pt-25">
+    <section className="min-h-screen bg-slate-900 py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <button 
           onClick={onBack}
