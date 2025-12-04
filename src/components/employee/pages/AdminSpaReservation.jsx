@@ -88,10 +88,12 @@ export default function AdminSpaReservation({ onBack }) {
             onChange={handleChange}
             className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2"
           >
-            <option>Masaż klasyczny 60 min</option>
-            <option>Masaż relaksacyjny 90 min</option>
-            <option>Rytuał SPA</option>
-            <option>Piling + masaż</option>
+            <option>Masaż klasyczny całościowy</option>
+            <option>Masaż relaksacyjny</option>
+            <option>Masaż balijski</option>
+            <option>Masaż ciepłą czekoladą</option>
+            <option>Kobido</option>
+            <option>Body peeling</option>
           </select>
         </div>
 
