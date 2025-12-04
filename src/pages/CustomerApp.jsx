@@ -59,7 +59,7 @@ export default function CustomerApp() {
 
           case 'Rooms':
           return (
-          <InfoHotel />
+          <Rooms />
           )
 
           case 'SPA':
@@ -81,13 +81,17 @@ export default function CustomerApp() {
   }
 
   return (
-    <div className="h-full w-full"> {/* Zmienione na h-full i w-full */}
+    <>
+      {/* NAVBAR NAJPIERW - poza div z paddingiem */}
       <NavMenu 
         onNavigate={(page) => setCurrentPage(page)}
         onBookNow={() => setCurrentPage('rooms')}
       />
-      {renderPage()}
-    </div>
-    
+      
+      {/* ZAWARTOŚĆ Z PADDINGIEM */}
+      <div className="pt-46 bg-slate-900 min-h-screen">
+        {renderPage()}
+      </div>
+    </>
   )
 }
