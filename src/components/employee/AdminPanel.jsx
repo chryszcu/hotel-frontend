@@ -20,9 +20,7 @@ const AdminPanel = () => {
 const ExampleContent = ({ selected, setSelected }) => (
   <div className="h-screen w-full p-8 text-slate-100">
     {selected === "Rezerwacja" && <AdminReservationSelector />}
-    {selected === "DashBoard" && (
-      <AdminDashboard setSelected={setSelected} />
-    )}
+    {selected === "DashBoard" && (<AdminDashboard setSelected={setSelected} />)}
     {selected === "Sprzątanie" && <AdminRoomCleaning />}
     {selected === "Lista pokoi" && <AdminRooms />}
     {selected === "Członkowie" && <AdminMembers />}

@@ -3,6 +3,13 @@ import { useState } from 'react'
 import HomePage from '../components/customer/HomePage'
 import RoomList from '../components/customer/RoomList'
 import BookingForm from '../components/customer/BookingForm'
+import NavMenu from '../components/customer/NavMenu'
+import InfoHotel from '../components/customer/MenuPages/InfoHotel'
+import Rooms from '../components/customer/MenuPages/Rooms'
+import Contact from '../components/customer/MenuPages/Contact'
+import Conferention from '../components/customer/MenuPages/Conferentions'
+import SPA from '../components/customer/MenuPages/SPA'
+
 
 export default function CustomerApp() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -11,7 +18,7 @@ export default function CustomerApp() {
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage onBookNow={() => setCurrentPage('rooms')} />
+        return <HomePage />
       case 'rooms':
         return (
           <RoomList 
@@ -45,6 +52,29 @@ export default function CustomerApp() {
             </div>
           </div>
         )
+        case 'info':
+          return (
+          <InfoHotel />
+          )
+
+          case 'Rooms':
+          return (
+          <InfoHotel />
+          )
+
+          case 'SPA':
+          return (
+          <SPA />
+          )
+          case 'Confer':
+          return (
+          <Conferention />
+          )
+          case 'Cont':
+          return (
+          <Contact />
+          )
+
       default:
         return <HomePage />
     }
@@ -52,7 +82,12 @@ export default function CustomerApp() {
 
   return (
     <div className="h-full w-full"> {/* Zmienione na h-full i w-full */}
+      <NavMenu 
+        onNavigate={(page) => setCurrentPage(page)}
+        onBookNow={() => setCurrentPage('rooms')}
+      />
       {renderPage()}
     </div>
+    
   )
 }

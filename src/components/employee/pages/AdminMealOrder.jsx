@@ -112,7 +112,7 @@ export default function AdminMealOrder({ onBack }) {
 
           <div>
             <label className="block text-xs text-slate-300 mb-1">
-              Rodzaj posiłku
+              Numer z menu
             </label>
             <select
               name="mealType"
@@ -120,10 +120,10 @@ export default function AdminMealOrder({ onBack }) {
               onChange={handleChange}
               className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
-              <option value="breakfast">Śniadanie</option>
-              <option value="lunch">Obiad</option>
-              <option value="dinner">Kolacja</option>
-              <option value="roomService">Room service / danie z karty</option>
+              <option value="breakfast">1</option>
+              <option value="lunch">2</option>
+              <option value="dinner">3</option>
+              <option value="roomService">4</option>
             </select>
           </div>
 
