@@ -1,6 +1,6 @@
 export default function Navbar({ onNavigate, onBookNow }) {
   return (
-    <header className="w-full bg-slate-900/80 backdrop-blur-md border-b border-slate-800 fixed top-0 left-0 z-50">
+    <header className="w-full bg-slate-900/80 backdrop-blur-md fixed top-0 left-0 z-50">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
         {/* Logo */}
