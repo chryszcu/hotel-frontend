@@ -19,6 +19,10 @@ export default function CustomerApp() {
     switch (currentPage) {
       case 'home':
         return <HomePage />
+
+      case 'roomsPage':
+        return <Rooms />
+
       case 'rooms':
         return (
           <RoomList 
@@ -29,6 +33,7 @@ export default function CustomerApp() {
             onBack={() => setCurrentPage('home')}
           />
         )
+
       case 'booking':
         return (
           <BookingForm 
@@ -57,15 +62,11 @@ export default function CustomerApp() {
           <InfoHotel />
           )
 
-          case 'Rooms':
-          return (
-          <Rooms />
-          )
-
           case 'SPA':
           return (
           <SPA />
           )
+          
           case 'Confer':
           return (
           <Conferention />
@@ -87,11 +88,23 @@ export default function CustomerApp() {
         onNavigate={(page) => setCurrentPage(page)}
         onBookNow={() => setCurrentPage('rooms')}
       />
-      
-      {/* ZAWARTOŚĆ Z PADDINGIEM */}
-      <div className="pt-46 bg-slate-900 min-h-screen">
-        {renderPage()}
-      </div>
+          
+    <div
+      className="
+        min-h-screen
+        pt-24
+        text-slate-900
+        bg-[#f8f4ec]
+        bg-[linear-gradient(to_bottom,rgba(212,175,55,0.22)_1px,transparent_1px)]
+        bg-size-[100%_8px]
+      "
+    >
+      {renderPage()}
+    </div>
+
+
+
+
     </>
   )
 }

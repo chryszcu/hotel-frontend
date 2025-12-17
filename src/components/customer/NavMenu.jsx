@@ -1,65 +1,71 @@
 export default function Navbar({ onNavigate, onBookNow }) {
   return (
-    <header className="w-full bg-slate-900/80 backdrop-blur-md fixed top-0 left-0 z-50">
-      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-1.5">
+    <header className="w-full bg-white/90 backdrop-blur fixed top-0 left-0 z-50 border-b border-slate-200">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
 
         {/* Logo */}
-        <div 
-        className="flex justify-center cursor-pointer"
-        onClick={() => onNavigate('home')}
->
-        <img
-          src="src/components/logo.png"
-          alt="logo"
-          className="w-25 h-20 rounded-md"
-        />
-        
-        
-      </div>
+        <div
+          className="cursor-pointer flex items-center"
+          onClick={() => onNavigate("home")}
+        >
+          <img
+            src="src/components/logo.png"
+            alt="logo"
+            className="h-24 w-28"
+          />
+        </div>
 
         {/* Menu */}
-        <ul className="hidden md:flex items-center gap-8 text-slate-200 text-sm font-medium">
-            <li 
-              className="hover:text-indigo-400 cursor-pointer transition"
-              onClick={() => onNavigate('info')}
-            >
-              O hotelu
-            </li>
-            <li 
-              className="hover:text-indigo-400 cursor-pointer transition"
-              onClick={() => onNavigate('rooms')}
-            >
-              Pokoje
-            </li>
-            <li 
-              className="hover:text-indigo-400 cursor-pointer transition"
-              onClick={() => onNavigate('SPA')}
-            >
-              SPA
-            </li>
-            <li 
-              className="hover:text-indigo-400 cursor-pointer transition"
-              onClick={() => onNavigate('Confer')}
-            >
-              Konferencje
-            </li>
-            <li 
-              className="hover:text-indigo-400 cursor-pointer transition"
-              onClick={() => onNavigate('Cont')}
-            >
-              Kontakt
-            </li>
+        <ul className="hidden md:flex items-center gap-10 font-heading text-sm tracking-[0.18em] uppercase text-slate-900">
+          <li
+            className="cursor-pointer hover:text-[#C9A24D] transition"
+            onClick={() => onNavigate("info")}
+          >
+            O hotelu
+          </li>
+          <li
+            className="cursor-pointer hover:text-[#C9A24D] transition"
+            onClick={() => onNavigate("roomsPage")}
+          >
+            Pokoje
+          </li>
+          <li
+            className="cursor-pointer hover:text-[#C9A24D] transition"
+            onClick={() => onNavigate("SPA")}
+          >
+            SPA
+          </li>
+          <li
+            className="cursor-pointer hover:text-[#C9A24D] transition"
+            onClick={() => onNavigate("Confer")}
+          >
+            Konferencje
+          </li>
+          <li
+            className="cursor-pointer hover:text-[#C9A24D] transition"
+            onClick={() => onNavigate("Cont")}
+          >
+            Kontakt
+          </li>
         </ul>
-        
-        <button 
+
+        {/* CTA */}
+        <button
           onClick={onBookNow}
-          className="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors min-w-[200px]"
-          // DODANE: min-w-[200px] - minimalna szerokość przycisku
+          className="
+            border border-[#C9A24D]
+            px-8 py-3
+            font-heading text-sm tracking-[0.18em] uppercase
+            text-[#C9A24D]
+            hover:bg-[#C9A24D] hover:text-white
+            transition
+          "
         >
-          Zarezerwuj teraz
+          Zarezerwuj
         </button>
-        {/* Mobile Menu Icon */}
-        <div className="md:hidden text-slate-200 text-2xl cursor-pointer">
+
+        {/* Mobile */}
+        <div className="md:hidden text-slate-900 text-2xl cursor-pointer">
           ☰
         </div>
 

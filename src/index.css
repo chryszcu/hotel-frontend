@@ -1,1 +1,9 @@
 @import 'tailwindcss';
+
+.font-heading {
+  font-family: "Cinzel", serif;
+}
+
+.font-body {
+  font-family: "Inter", sans-serif;
+}
