@@ -126,7 +126,7 @@ export default function Rooms() {
                     <div className="mt-6 flex flex-col sm:flex-row gap-3">
                       <button
                         type="button"
-                        className="flex-1 rounded-none bg-amber-600 px-5 py-3 text-white font-semibold hover:bg-amber-700 transition"
+                        className="flex-1 rounded-none bg-[#C9A24D] px-5 py-3 text-white font-semibold hover:bg-amber-700 transition"
                         onClick={(e) => {
                           e.stopPropagation();
                           alert(`Wybrano: ${room.name}`);
