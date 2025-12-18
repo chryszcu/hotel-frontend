@@ -6,7 +6,7 @@ export default function HomePage() {
 
         {/* Nagłówek */}
         <h1 className="font-heading text-5xl md:text-7xl font-bold tracking-[0.18em] mb-6">
-          LUKSUSOWY HOTEL
+          ZNOWU NIE DZIAŁA
         </h1>
 
         {/* Linia */}
