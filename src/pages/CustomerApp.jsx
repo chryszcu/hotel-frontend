@@ -1,5 +1,5 @@
 // src/pages/CustomerApp.jsx
-import { useState, useEffect } from 'react' // ← dodaj useEffect
+import { useState, useEffect } from 'react'
 import HomePage from '../components/customer/HomePage'
 import RoomList from '../components/customer/RoomList'
 import BookingForm from '../components/customer/BookingForm'
@@ -14,14 +14,21 @@ import Footer from '../components/customer/Footer'
 export default function CustomerApp() {
   const [currentPage, setCurrentPage] = useState('home')
   const [selectedRoom, setSelectedRoom] = useState(null)
+  const [roomToExpand, setRoomToExpand] = useState(null) // Nowy stan do zapamiętania który pokój rozwijać
 
   // Scroll to top przy każdej zmianie strony
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth' // płynne przewijanie
+      behavior: 'smooth'
     })
-  }, [currentPage]) // uruchamia się przy każdej zmianie currentPage
+  }, [currentPage])
+
+  // Funkcja do przejścia do strony Rooms z rozwiniętym pokojem
+  const handleNavigateToRoomDetails = (roomId) => {
+    setRoomToExpand(roomId); // Zapamiętaj który pokój ma być rozwinięty
+    setCurrentPage('roomsPage'); // Przejdź do strony Rooms
+  };
 
   const renderPage = () => {
     switch (currentPage) {
@@ -29,7 +36,7 @@ export default function CustomerApp() {
         return <HomePage />
 
       case 'roomsPage':
-        return <Rooms />
+        return <Rooms roomToExpand={roomToExpand} /> // Przekaż roomToExpand do komponentu Rooms
 
       case 'rooms':
         return (
@@ -39,6 +46,7 @@ export default function CustomerApp() {
               setCurrentPage('booking')
             }}
             onBack={() => setCurrentPage('home')}
+            onNavigateToRoomDetails={handleNavigateToRoomDetails} // Przekaż funkcję
           />
         )
 
