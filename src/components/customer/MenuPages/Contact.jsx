@@ -26,7 +26,7 @@ export default function Contact() {
               ADRES
             </h3>
             <p className="text-slate-600">
-              Hotel SPA Luxury<br />
+              Hotel SPA<br />
               ul. Przykładowa 12<br />
               00-123 Warszawa
             </p>

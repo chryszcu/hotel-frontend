@@ -1,5 +1,5 @@
 // src/pages/CustomerApp.jsx
-import { useState } from 'react'
+import { useState, useEffect } from 'react' // ← dodaj useEffect
 import HomePage from '../components/customer/HomePage'
 import RoomList from '../components/customer/RoomList'
 import BookingForm from '../components/customer/BookingForm'
@@ -9,11 +9,19 @@ import Rooms from '../components/customer/MenuPages/Rooms'
 import Contact from '../components/customer/MenuPages/Contact'
 import Conferention from '../components/customer/MenuPages/Conferentions'
 import SPA from '../components/customer/MenuPages/SPA'
-
+import Footer from '../components/customer/Footer'
 
 export default function CustomerApp() {
   const [currentPage, setCurrentPage] = useState('home')
   const [selectedRoom, setSelectedRoom] = useState(null)
+
+  // Scroll to top przy każdej zmianie strony
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // płynne przewijanie
+    })
+  }, [currentPage]) // uruchamia się przy każdej zmianie currentPage
 
   const renderPage = () => {
     switch (currentPage) {
@@ -44,13 +52,17 @@ export default function CustomerApp() {
         )
       case 'success':
         return (
-          <div className="min-h-screen flex items-center justify-center bg-slate-900">
+          <div className="min-h-screen flex items-center justify-center bg-[#f8f4ec]
+        bg-[linear-gradient(to_bottom,rgba(212,175,55,0.22)_1px,transparent_1px)]
+        bg-size-[100%_8px]">
             <div className="text-center text-white">
-              <h2 className="text-3xl font-bold mb-4">Rezerwacja potwierdzona!</h2>
-              <p className="text-slate-300 mb-8">Dziękujemy za rezerwację w naszym hotelu.</p>
+              <h2 className="text-slate-900 text-3xl font-bold mb-4">Rezerwacja potwierdzona!</h2>
+              <p className="text-slate-600 mb-8">Dziękujemy za rezerwację w naszym hotelu.</p>
               <button 
                 onClick={() => setCurrentPage('home')}
-                className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700"
+                className="flex-1 border border-[#C9A24D] px-6 py-3
+                           font-semibold text-[#C9A24D]
+                           hover:bg-[#C9A24D] hover:text-white transition bg-white/90"
               >
                 Powrót do strony głównej
               </button>
@@ -58,24 +70,13 @@ export default function CustomerApp() {
           </div>
         )
         case 'info':
-          return (
-          <InfoHotel />
-          )
-
-          case 'SPA':
-          return (
-          <SPA />
-          )
-          
-          case 'Confer':
-          return (
-          <Conferention />
-          )
-          case 'Cont':
-          return (
-          <Contact />
-          )
-
+          return <InfoHotel />
+        case 'SPA':
+          return <SPA />
+        case 'Confer':
+          return <Conferention />
+        case 'Cont':
+          return <Contact />
       default:
         return <HomePage />
     }
@@ -83,28 +84,27 @@ export default function CustomerApp() {
 
   return (
     <>
-      {/* NAVBAR NAJPIERW - poza div z paddingiem */}
       <NavMenu 
         onNavigate={(page) => setCurrentPage(page)}
         onBookNow={() => setCurrentPage('rooms')}
       />
           
-    <div
-      className="
-        min-h-screen
-        pt-24
-        text-slate-900
-        bg-[#f8f4ec]
-        bg-[linear-gradient(to_bottom,rgba(212,175,55,0.22)_1px,transparent_1px)]
-        bg-size-[100%_8px]
-      "
-    >
-      {renderPage()}
-    </div>
-
-
-
-
+      <div
+        className="
+          min-h-screen
+          pt-24
+          text-slate-900
+          bg-[#f8f4ec]
+          bg-[linear-gradient(to_bottom,rgba(212,175,55,0.22)_1px,transparent_1px)]
+          bg-size-[100%_8px]
+        "
+      >
+        {renderPage()}
+        <Footer 
+          onNavigate={(page) => setCurrentPage(page)}
+          onBookNow={() => setCurrentPage('rooms')}
+        />
+      </div>
     </>
   )
 }
