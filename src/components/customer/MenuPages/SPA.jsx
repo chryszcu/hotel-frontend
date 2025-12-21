@@ -1,3 +1,4 @@
+// src/components/customer/MenuPages/SPA.jsx
 import { useState } from "react";
 
 export default function SPA() {
@@ -57,6 +58,28 @@ export default function SPA() {
     },
   ];
 
+  // 3 ilustracyjne zdjęcia SPA
+  const spaImages = [
+    {
+      id: 1,
+      src: "/spa1.jpg",
+      alt: "Masaż twarzy",
+      title: "Profesjonalny masaż twarzy"
+    },
+    {
+      id: 2,
+      src: "/spa2.jpg",
+      alt: "Produkty SPA",
+      title: "Wyjątkowa atmosfera"
+    },
+    {
+      id: 3,
+      src: "/spa3.jpg",
+      alt: "Masaż ciała",
+      title: "Masaż całego ciała"
+    }
+  ];
+
   const handleServiceClick = (service) => {
     setSelectedService(service);
     setShowForm(true);
@@ -110,7 +133,7 @@ export default function SPA() {
 
   return (
     <div className="min-h-screen bg-transparent text-slate-900 px-6 py-24">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Nagłówek */}
         <div className="mb-10 text-center">
           <h1 className="font-heading text-4xl md:text-5xl font-bold">
@@ -118,6 +141,23 @@ export default function SPA() {
           </h1>
           <div className="mt-5 flex justify-center">
             <span className="h-px w-24 bg-black/70" />
+          </div>
+        </div>
+
+        {/* Trzy zdjęcia ilustracyjne w rzędzie */}
+        <div className="mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {spaImages.map((image) => (
+              <div key={image.id} className="group relative overflow-hidden rounded-lg shadow-lg">
+                <div
+                  className="h-64 w-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110"
+                  style={{ backgroundImage: `url(${image.src})` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <p className="text-white font-medium text-lg">{image.title}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -133,145 +173,145 @@ export default function SPA() {
             <div className="min-h-screen flex justify-center pt-24 pb-24 px-4">
               <div className="w-full max-w-md bg-white border border-slate-200 shadow-sm p-8 text-slate-900">
                 <div className="flex justify-between items-center mb-6">
-                <h2 className="font-heading text-2xl font-bold tracking-[0.12em] uppercase">
-                  Rezerwacja SPA
-                </h2>
+                  <h2 className="font-heading text-2xl font-bold tracking-[0.12em] uppercase">
+                    Rezerwacja SPA
+                  </h2>
 
-                <button
-                  onClick={handleCloseForm}
-                  className="text-slate-700 hover:text-black text-3xl leading-none"
-                  aria-label="Zamknij"
-                >
-                  ×
-                </button>
-              </div>
-
-              <div className="mb-6 p-4 border border-slate-200 bg-white">
-                <h3 className="font-heading text-lg font-semibold text-[#C9A24D] mb-2">
-                  {selectedService.title}
-                </h3>
-                <p className="text-slate-600 text-sm leading-relaxed mb-3">
-                  {selectedService.description}
-                </p>
-                <p className="font-semibold text-slate-900">{selectedService.price}</p>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label className="block text-sm font-semibold mb-2">
-                    Imię i nazwisko *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full bg-white border border-slate-300 px-4 py-3 focus:outline-none focus:border-[#C9A24D]"
-                    placeholder="Wpisz imię i nazwisko"
-                  />
+                  <button
+                    onClick={handleCloseForm}
+                    className="text-slate-700 hover:text-black text-3xl leading-none"
+                    aria-label="Zamknij"
+                  >
+                    ×
+                  </button>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-semibold mb-2">Email *</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full bg-white border border-slate-300 px-4 py-3 focus:outline-none focus:border-[#C9A24D]"
-                    placeholder="twoj@email.com"
-                  />
+                <div className="mb-6 p-4 border border-slate-200 bg-white">
+                  <h3 className="font-heading text-lg font-semibold text-[#C9A24D] mb-2">
+                    {selectedService.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                    {selectedService.description}
+                  </p>
+                  <p className="font-semibold text-slate-900">{selectedService.price}</p>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-semibold mb-2">Telefon *</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full bg-white border border-slate-300 px-4 py-3 focus:outline-none focus:border-[#C9A24D]"
-                    placeholder="+48 123 456 789"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
-                    <label className="block text-sm font-semibold mb-2">Data *</label>
+                    <label className="block text-sm font-semibold mb-2">
+                      Imię i nazwisko *
+                    </label>
                     <input
-                      type="date"
-                      name="date"
-                      value={formData.date}
+                      type="text"
+                      name="name"
+                      value={formData.name}
                       onChange={handleInputChange}
                       required
-                      min={new Date().toISOString().split("T")[0]}
                       className="w-full bg-white border border-slate-300 px-4 py-3 focus:outline-none focus:border-[#C9A24D]"
+                      placeholder="Wpisz imię i nazwisko"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold mb-2">Godzina *</label>
-                    <select
-                      name="time"
-                      value={formData.time}
+                    <label className="block text-sm font-semibold mb-2">Email *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
                       onChange={handleInputChange}
                       required
                       className="w-full bg-white border border-slate-300 px-4 py-3 focus:outline-none focus:border-[#C9A24D]"
-                    >
-                      <option value="09:00">09:00</option>
-                      <option value="10:00">10:00</option>
-                      <option value="11:00">11:00</option>
-                      <option value="12:00">12:00</option>
-                      <option value="13:00">13:00</option>
-                      <option value="14:00">14:00</option>
-                      <option value="15:00">15:00</option>
-                      <option value="16:00">16:00</option>
-                      <option value="17:00">17:00</option>
-                      <option value="18:00">18:00</option>
-                      <option value="19:00">19:00</option>
-                      <option value="20:00">20:00</option>
-                    </select>
+                      placeholder="twoj@email.com"
+                    />
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-semibold mb-2">
-                    Uwagi (opcjonalnie)
-                  </label>
-                  <textarea
-                    name="notes"
-                    value={formData.notes}
-                    onChange={handleInputChange}
-                    rows="3"
-                    className="w-full bg-white border border-slate-300 px-4 py-3 focus:outline-none focus:border-[#C9A24D]"
-                    placeholder="Np. preferencje dotyczące masażu, alergie, życzenia specjalne..."
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Telefon *</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full bg-white border border-slate-300 px-4 py-3 focus:outline-none focus:border-[#C9A24D]"
+                      placeholder="+48 123 456 789"
+                    />
+                  </div>
 
-                <div className="flex gap-3 pt-4">
-                  <button
-                    type="button"
-                    onClick={handleCloseForm}
-                    className="flex-1 border border-black/70 px-4 py-3 font-semibold hover:bg-black hover:text-white transition"
-                  >
-                    Anuluj
-                  </button>
-                  <button
-                    type="submit"
-                    className="flex-1 border border-[#C9A24D] px-4 py-3 font-semibold text-[#C9A24D] hover:bg-[#C9A24D] hover:text-white transition"
-                  >
-                    Zarezerwuj
-                  </button>
-                </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-semibold mb-2">Data *</label>
+                      <input
+                        type="date"
+                        name="date"
+                        value={formData.date}
+                        onChange={handleInputChange}
+                        required
+                        min={new Date().toISOString().split("T")[0]}
+                        className="w-full bg-white border border-slate-300 px-4 py-3 focus:outline-none focus:border-[#C9A24D]"
+                      />
+                    </div>
 
-                <p className="text-xs text-slate-600 text-center mt-3">
-                  * Pola wymagane. Potwierdzenie rezerwacji wyślemy na podany adres email.
-                </p>
-              </form>
-            </div>
+                    <div>
+                      <label className="block text-sm font-semibold mb-2">Godzina *</label>
+                      <select
+                        name="time"
+                        value={formData.time}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full bg-white border border-slate-300 px-4 py-3 focus:outline-none focus:border-[#C9A24D]"
+                      >
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">
+                      Uwagi (opcjonalnie)
+                    </label>
+                    <textarea
+                      name="notes"
+                      value={formData.notes}
+                      onChange={handleInputChange}
+                      rows="3"
+                      className="w-full bg-white border border-slate-300 px-4 py-3 focus:outline-none focus:border-[#C9A24D]"
+                      placeholder="Np. preferencje dotyczące masażu, alergie, życzenia specjalne..."
+                    />
+                  </div>
+
+                  <div className="flex gap-3 pt-4">
+                    <button
+                      type="button"
+                      onClick={handleCloseForm}
+                      className="flex-1 border border-black/70 px-4 py-3 font-semibold hover:bg-black hover:text-white transition"
+                    >
+                      Anuluj
+                    </button>
+                    <button
+                      type="submit"
+                      className="flex-1 border border-[#C9A24D] px-4 py-3 font-semibold text-[#C9A24D] hover:bg-[#C9A24D] hover:text-white transition"
+                    >
+                      Zarezerwuj
+                    </button>
+                  </div>
+
+                  <p className="text-xs text-slate-600 text-center mt-3">
+                    * Pola wymagane. Potwierdzenie rezerwacji wyślemy na podany adres email.
+                  </p>
+                </form>
+              </div>
             </div>
           </div>
         )}

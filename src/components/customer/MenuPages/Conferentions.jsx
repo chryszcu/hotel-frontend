@@ -24,34 +24,34 @@ export default function Conferention() {
       id: "business",
       title: "SALA BIZNESOWA",
       description:
-        "Przestrzeń idealna na spotkania biznesowe, szkolenia i prezentacje. Wyposażona w nowoczesny system multimedialny, komfortowe fotele i oświetlenie dostosowane do potrzeb spotkań.",
+        "Przestrzeń idealna na spotkania biznesowe, szkolenia i prezentacje. Wyposażona w nowoczesny system multimedialny, komfortowe fotele i oświetlenie dostosowane do potrzeb spotkań. Doskonałe warunki do pracy zespołowej i indywidualnych konsultacji.",
       price: "299 zł / godz.",
       capacity: "20–30 osób",
       size: "45 m²",
-      equipment: ["Ekran projekcyjny", "System nagłośnienia", "Flipchart", "Wi-Fi", "Klimatyzacja"],
-      image: "/sala1.jpg",
+      equipment: ["Ekran projekcyjny", "System nagłośnienia", "Flipchart", "Wi-Fi", "Klimatyzacja", "Stanowiska dla moderatorów"],
+      image: "/sala1.jpg"
     },
     {
       id: "conference",
       title: "SALA KONFERENCYJNA",
       description:
-        "Duża sala przystosowana do większych wydarzeń, konferencji i seminariów. Posiada scenę, profesjonalne nagłośnienie i możliwość ustawienia w różnych konfiguracjach.",
+        "Duża sala przystosowana do większych wydarzeń, konferencji i seminariów. Posiada scenę, profesjonalne nagłośnienie i możliwość ustawienia w różnych konfiguracjach. Idealna na kongresy, targi i wydarzenia branżowe.",
       price: "499 zł / godz.",
       capacity: "50–80 osób",
       size: "80 m²",
-      equipment: ["Scena", "Profesjonalne nagłośnienie", "3 ekrany", "Mikrofony bezprzewodowe", "Rejestracja video"],
-      image: "/sala2.jpg",
+      equipment: ["Scena", "Profesjonalne nagłośnienie", "3 ekrany", "Mikrofony bezprzewodowe", "Rejestracja video", "Streaming na żywo"],
+      image: "/sala2.jpg"
     },
     {
       id: "premium",
       title: "SALA PREMIUM",
       description:
-        "Luksusowa przestrzeń z najwyższej klasy wyposażeniem, idealna na ważne spotkania, zarządy i prestiżowe eventy. System tłumaczeń symultanicznych, indywidualne oświetlenie.",
+        "Luksusowa przestrzeń z najwyższej klasy wyposażeniem, idealna na ważne spotkania, zarządy i prestiżowe eventy. System tłumaczeń symultanicznych, indywidualne oświetlenie. Gwarancja najwyższego standardu obsługi i dyskrecji.",
       price: "799 zł / godz.",
       capacity: "30–40 osób",
       size: "60 m²",
-      equipment: ["System tłumaczeń", "Indywidualne monitory", "Kontrola oświetlenia", "VIP lounge", "Butler service"],
-      image: "/sala3.jpg",
+      equipment: ["System tłumaczeń", "Indywidualne monitory", "Kontrola oświetlenia", "VIP lounge", "Butler service", "System głosowania"],
+      image: "/sala3.jpg"
     },
   ];
 
@@ -169,29 +169,26 @@ export default function Conferention() {
     
     const duration = calculateDuration();
     const pricePerHour = parseInt(selectedConferenceRoom.price.split(" ")[0]);
-    //const baseCost = pricePerHour * duration;
-    
     return pricePerHour * duration;
   };
 
   return (
     <div className="min-h-screen bg-transparent text-slate-900 px-6 py-24">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Nagłówek */}
-        <div className="mb-10 text-center">
+        <div className="mb-12 text-center">
           <h1 className="font-heading text-4xl md:text-5xl font-bold">
             KONFERENCJE I EVENTY
           </h1>
           <div className="mt-5 flex justify-center">
             <span className="h-px w-24 bg-black/70" />
           </div>
+          <p className="mt-8 text-slate-600 text-lg leading-relaxed max-w-3xl mx-auto">
+            Nasze centrum konferencyjne oferuje nowoczesne sale, pełne wyposażenie multimedialne
+            oraz profesjonalną obsługę techniczną. To idealne miejsce na szkolenia, prezentacje,
+            spotkania biznesowe oraz eventy firmowe.
+          </p>
         </div>
-
-        <p className="text-slate-600 text-lg leading-relaxed mb-12 max-w-3xl mx-auto text-center">
-          Nasze centrum konferencyjne oferuje nowoczesne sale, pełne wyposażenie multimedialne
-          oraz profesjonalną obsługę techniczną. To idealne miejsce na szkolenia, prezentacje,
-          spotkania biznesowe oraz eventy firmowe.
-        </p>
 
         {/* Formularz rezerwacji (overlay) */}
         {showForm && selectedConferenceRoom && (
@@ -455,90 +452,144 @@ export default function Conferention() {
           </div>
         )}
 
-        {/* Lista sal konferencyjnych */}
-        <div className="font-heading grid grid-cols-1 md:grid-cols-3 gap-8">
-          {conferenceRooms.map((room) => (
+        {/* Lista sal konferencyjnych - nowy układ */}
+        <div className="space-y-16">
+          {conferenceRooms.map((room, index) => (
             <div
               key={room.id}
-              onClick={() => handleConferenceRoomClick(room)}
-              className="
-                bg-white border border-slate-200 shadow-sm
-                p-6 cursor-pointer transition
-                hover:shadow-md hover:border-amber-300
-              "
+              className="bg-white border border-slate-200 shadow-sm overflow-hidden"
             >
-              <h3 className="text-xl font-semibold text-[#C9A24D] mb-3">
-                {room.title}
-              </h3>
-
-              <p className="text-slate-600 text-sm leading-relaxed mb-5">
-                {room.description}
-              </p>
-
-              <div className="mb-4">
-                <h4 className="font-medium text-slate-900 mb-2">Wyposażenie:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {room.equipment.map((item, index) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded"
-                    >
-                      {item}
-                    </span>
-                  ))}
+              <div className="flex flex-col lg:flex-row">
+                {/* Zdjęcie - lewa strona */}
+                <div className="lg:w-1/2 h-80 lg:h-auto">
+                  <div
+                    className="h-full w-full bg-center bg-cover hover:scale-[1.02] transition-transform duration-500"
+                    style={{ backgroundImage: `url(${room.image})` }}
+                  />
                 </div>
-              </div>
 
-              <div className="flex items-center justify-between pt-4 border-t border-slate-200">
-                <div>
-                  <p className="font-semibold text-slate-900">{room.price}</p>
-                  <p className="text-slate-500 text-sm">{room.capacity} • {room.size}</p>
+                {/* Opis i dane - prawa strona */}
+                <div className="lg:w-1/2 p-8 lg:p-10">
+                  <div className="h-full flex flex-col">
+                    <div>
+                      <h3 className="font-heading text-2xl lg:text-3xl font-semibold text-[#C9A24D] mb-4">
+                        {room.title}
+                      </h3>
+
+                      <p className="text-slate-600 leading-relaxed mb-6">
+                        {room.description}
+                      </p>
+
+                      {/* Specyfikacje */}
+                      <div className="mb-6 grid grid-cols-2 gap-4">
+                        <div className="flex items-center gap-2">
+                          <svg className="w-5 h-5 text-[#C9A24D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-10A2.5 2.5 0 0021 3.5V3a2 2 0 00-2-2h-4a2 2 0 00-2 2v.5a2.5 2.5 0 002.5 2.5z" />
+                          </svg>
+                          <div>
+                            <p className="font-medium text-slate-900">Pojemność</p>
+                            <p className="text-slate-600 text-sm">{room.capacity}</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center gap-2">
+                          <svg className="w-5 h-5 text-[#C9A24D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                          </svg>
+                          <div>
+                            <p className="font-medium text-slate-900">Powierzchnia</p>
+                            <p className="text-slate-600 text-sm">{room.size}</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center gap-2">
+                          <svg className="w-5 h-5 text-[#C9A24D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <div>
+                            <p className="font-medium text-slate-900">Cena</p>
+                            <p className="text-slate-600 text-sm font-semibold">{room.price}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Wyposażenie */}
+                      <div className="mb-6">
+                        <h4 className="font-medium text-slate-900 mb-3">Standardowe wyposażenie:</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {room.equipment.map((item, index) => (
+                            <span
+                              key={index}
+                              className="px-3 py-1.5 bg-slate-100 text-slate-700 text-sm rounded-lg border border-slate-200"
+                            >
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Przycisk */}
+                    <div className="mt-auto pt-6 border-t border-slate-200">
+                      <button
+                        onClick={() => handleConferenceRoomClick(room)}
+                        className="w-full lg:w-auto border border-[#C9A24D] px-8 py-4 font-heading text-sm tracking-[0.18em] uppercase text-[#C9A24D] hover:bg-[#C9A24D] hover:text-white transition flex items-center justify-center gap-3"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        ZAREZERWUJ SALĘ
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <span className="text-sm font-semibold border border-[#C9A24D]/70 px-4 py-1.5">
-                  <span className="text-[#C9A24D]">Wybierz</span>
-                </span>
               </div>
             </div>
           ))}
         </div>
 
         {/* Informacja dodatkowa */}
-        <div className="mt-12 p-6 bg-white border border-slate-200 shadow-sm">
-          <h3 className="text-xl font-semibold text-[#C9A24D] mb-4">
+        <div className="mt-16 p-8 bg-white border border-slate-200 shadow-sm">
+          <h3 className="text-2xl font-semibold text-[#C9A24D] mb-6">
             INFORMACJE ORGANIZACYJNE
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-1 gap-8">
             <div>
               <h4 className="font-medium text-slate-900 mb-3">Rezerwacja:</h4>
-              <ul className="text-slate-600 space-y-2 text-sm">
+              <ul className="text-slate-600 space-y-3">
                 <li className="flex items-start">
-                  <span className="text-[#C9A24D] mr-2">•</span>
-                  Minimalny czas wynajmu: 1 godzina
+                  <span className="text-[#C9A24D] mr-2 mt-1">•</span>
+                  <span>Minimalny czas wynajmu: <strong>1 godzina</strong></span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-[#C9A24D] mr-2">•</span>
-                  Rezerwacje przyjmujemy z co najmniej 48-godzinnym wyprzedzeniem
+                  <span className="text-[#C9A24D] mr-2 mt-1">•</span>
+                  <span>Rezerwacje przyjmujemy z co najmniej <strong>48-godzinnym</strong> wyprzedzeniem</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-[#C9A24D] mr-2">•</span>
-                  Anulowanie rezerwacji możliwe do 2 dni przed wydarzeniem
+                  <span className="text-[#C9A24D] mr-2 mt-1">•</span>
+                  <span>Anulowanie rezerwacji możliwe do <strong>2 dni</strong> przed wydarzeniem</span>
                 </li>
               </ul>
             </div>
           </div>
-          
-          <div className="mt-6 pt-6 border-t border-slate-200">
-            <div className="flex items-start gap-3">
-              <svg className="w-5 h-5 text-[#C9A24D] mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              <div>
-                <p className="text-slate-700 text-sm font-medium">
-                  Potrzebujesz indywidualnej wyceny lub masz pytania?
-                </p>
-                <p className="text-slate-600 text-sm mt-1">
-                  Skontaktuj się z naszym Działem Konferencji: <span className="font-semibold">+48 123 456 789</span> lub <span className="font-semibold">konferencje@hotelspa.pl</span>
-                </p>
+          <div className="mt-8 pt-8 border-t border-slate-200">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+              <div className="flex items-center gap-4">
+                <svg className="w-10 h-10 text-[#C9A24D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <div>
+                  <p className="text-slate-700 font-medium">
+                    Potrzebujesz indywidualnej wyceny?
+                  </p>
+                  <p className="text-slate-600 text-sm mt-1">
+                    Skontaktuj się z naszym Działem Konferencji
+                  </p>
+                </div>
+              </div>
+              <div className="md:ml-auto">
+                <p className="text-slate-900 font-semibold">+48 123 456 789</p>
+                <p className="text-slate-600 text-sm">konferencje@hotelspa.pl</p>
               </div>
             </div>
           </div>
