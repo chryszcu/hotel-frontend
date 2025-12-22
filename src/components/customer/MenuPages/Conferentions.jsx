@@ -1,5 +1,6 @@
 // src/components/customer/MenuPages/Conferentions.jsx
 import { useState } from "react";
+import { FadeIn, SlideUp, SlideLeft, SlideRight } from '../../animations';
 
 export default function Conferention() {
   const [showForm, setShowForm] = useState(false);
@@ -588,7 +589,7 @@ export default function Conferention() {
                 </div>
               </div>
               <div className="md:ml-auto">
-                <p className="text-slate-900 font-semibold">+48 123 456 789</p>
+                <p className="text-slate-900 font-semibold">+48 765 432 109</p>
                 <p className="text-slate-600 text-sm">konferencje@hotelspa.pl</p>
               </div>
             </div>

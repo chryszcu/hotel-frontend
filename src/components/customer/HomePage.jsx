@@ -1,4 +1,6 @@
 // src/components/customer/HomePage.jsx
+import { FadeIn, SlideUp, SlideLeft, SlideRight } from '../animations';
+
 export default function HomePage({ onNavigate }) {
   const rooms = [
     {
@@ -26,11 +28,10 @@ export default function HomePage({ onNavigate }) {
   // Funkcja do przejścia do strony pokoi
   const goToRooms = (roomId = null) => {
     if (onNavigate) {
-      onNavigate('roomsPage', roomId); // Przekazujemy roomId opcjonalnie
+      onNavigate('roomsPage', roomId);
     }
   };
 
-  // Funkcja dla konkretnego pokoju
   const handleRoomClick = (room) => {
     goToRooms(room.roomId);
   };
@@ -49,63 +50,72 @@ export default function HomePage({ onNavigate }) {
       >
         {/* Overlay */}
         <div className="absolute inset-0 bg-[#f7f5ef]/1" />
-
+        
         {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <h1 className="font-heading text-5xl md:text-7xl font-bold tracking-[0.18em] mb-6 text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
-            ZNOWU NIE
-            <br />
-            DZIAŁA
-          </h1>
+          <SlideUp delay={0.3}>
+            <h1 className="font-heading text-5xl md:text-7xl font-bold tracking-[0.18em] mb-6 text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
+              ZNOWU NIE
+              <br />
+              DZIAŁA
+            </h1>
+          </SlideUp>
 
-          <div className="flex justify-center mb-8">
-            <span className="h-px w-24 bg-[#1c2430]/60" />
-          </div>
+          <SlideUp delay={0.4}>
+            <div className="flex justify-center mb-8">
+              <span className="h-px w-24 bg-[#FFFFFF]/90" />
+            </div>
+          </SlideUp>
 
-          <p className="text-base md:text-lg text-white max-w-2xl mx-auto mb-14 leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
-            Odkryj niezapomniane chwile w naszym ekskluzywnym hotelu.
-            Klasyczna elegancja, luksusowe wnętrza i najwyższy komfort.
-          </p>
+          <SlideUp delay={0.5}>
+            <p className="text-base md:text-lg text-white max-w-2xl mx-auto mb-14 leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
+              Odkryj niezapomniane chwile w naszym ekskluzywnym hotelu.
+              Klasyczna elegancja, luksusowe wnętrza i najwyższy komfort.
+            </p>
+          </SlideUp>
 
           {/* Strzałka */}
-          <div className="flex justify-center">
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 24 24"
-              fill="none"
-              className="text-white animate-bounce"
-            >
-              <path
-                d="M6 9l6 6 6-6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
+          <FadeIn delay={1.0}>
+            <div className="flex justify-center">
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="text-white animate-bounce"
+              >
+                <path
+                  d="M6 9l6 6 6-6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
-      {/* O HOTELU – HISTORIA + SKRÓT */}
+      {/* O HOTELU */}
       <section className="py-24 border-t border-black/10">
         <div className="max-w-6xl mx-auto px-6 text-center">
+          <SlideUp delay={0.5}>
+            <h2 className="font-heading text-3xl md:text-4xl tracking-[0.25em] mb-10 text-[#7a6a3a]">
+              O NASZYM HOTELU
+            </h2>
+          </SlideUp>
 
-          {/* Nagłówek */}
-          <h2 className="font-heading text-3xl md:text-4xl tracking-[0.25em] mb-10 text-[#7a6a3a]">
-            O NASZYM HOTELU
-          </h2>
+          <SlideUp delay={0.2}>
+            <p className="text-base md:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed mb-16">
+              Nasz hotel położony jest w sercu Mazur, na skraju Parku Krajobrazowego
+              Puszczy Boreckiej, zaledwie 200 metrów od brzegu jeziora Tajty.
+              To miejsce stworzone z myślą o gościach poszukujących harmonii,
+              elegancji i prawdziwego wypoczynku – z dala od zgiełku, a jednocześnie
+              blisko natury.
+            </p>
+          </SlideUp>
 
-          {/* Opis */}
-          <p className="text-base md:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed mb-16">
-            Nasz hotel położony jest w sercu Mazur, na skraju Parku Krajobrazowego
-            Puszczy Boreckiej, zaledwie 200 metrów od brzegu jeziora Tajty.
-            To miejsce stworzone z myślą o gościach poszukujących harmonii,
-            elegancji i prawdziwego wypoczynku – z dala od zgiełku, a jednocześnie
-            blisko natury.
-          </p>
-          
           {/* Szybkie informacje
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
 
@@ -143,7 +153,7 @@ export default function HomePage({ onNavigate }) {
         </div>
       </section>
 
-      {/* Restauracja */}
+      {/* RESTAURACJA */}
       <section
         className="py-32 border-t border-black/10"
         style={{
@@ -152,48 +162,52 @@ export default function HomePage({ onNavigate }) {
           backgroundPosition: "center",
         }}
       >
-        {/* Overlay */}
         <div className="absolute inset-0 bg-[#f7f5ef]/10" />
-
-        {/* Content */}
+        
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <h1 className="font-heading text-5xl md:text-5xl font-bold tracking-[0.18em] mb-6 text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
-            RESTAURACJA
-          </h1>
+          <FadeIn delay={0.3}>
+            <h1 className="font-heading text-5xl md:text-5xl font-bold tracking-[0.18em] mb-6 text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
+              RESTAURACJA
+            </h1>
+          </FadeIn>
           
-          <div className="flex justify-center mb-8">
-            <span className="h-px w-24 bg-[#1c2430]/60" />
-          </div>
+          <SlideUp delay={0.3}>
+            <div className="flex justify-center mb-8">
+              <span className="h-px w-24 bg-[#1c2430]/60" />
+            </div>
+          </SlideUp>
         </div>
       </section>
 
       {/* POKOJE I APARTAMENTY */}
       <section className="py-24">
         <div className="max-w-screen-2xl mx-auto px-6">
-
-          <h2 className="text-center font-heading text-3xl md:text-4xl tracking-[0.25em] mb-16 text-[#7a6a3a]">
-            POKOJE I APARTAMENTY
-          </h2>
+          <SlideUp delay={0.3}>
+            <h2 className="text-center font-heading text-3xl md:text-4xl tracking-[0.25em] mb-16 text-[#7a6a3a]">
+              POKOJE I APARTAMENTY
+            </h2>
+          </SlideUp>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {rooms.map((room, index) => (
-              <button
-                key={index}
-                onClick={() => handleRoomClick(room)}
-                className="group relative overflow-hidden border border-black/20"
-              >
-                <img
-                  src={room.image}
-                  alt={room.title}
-                  className="w-full h-[360px] object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+              <SlideUp key={index} delay={index * 0.4}> {/* Stagger effect */}
+                <button
+                  onClick={() => handleRoomClick(room)}
+                  className="group relative overflow-hidden border border-black/20 w-full"
+                >
+                  <img
+                    src={room.image}
+                    alt={room.title}
+                    className="w-full h-[360px] object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
 
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="font-heading text-white tracking-widest text-sm md:text-base px-6 py-3 border border-white/70">
-                    {room.title}
-                  </span>
-                </div>
-              </button>
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="font-heading text-white tracking-widest text-sm md:text-base px-6 py-3 border border-white/70">
+                      {room.title}
+                    </span>
+                  </div>
+                </button>
+              </SlideUp>
             ))}
           </div>
         </div>
