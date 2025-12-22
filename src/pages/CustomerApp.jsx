@@ -14,7 +14,7 @@ import Footer from '../components/customer/Footer'
 export default function CustomerApp() {
   const [currentPage, setCurrentPage] = useState('home')
   const [selectedRoom, setSelectedRoom] = useState(null)
-  const [roomToExpand, setRoomToExpand] = useState(null) // Nowy stan do zapamiętania który pokój rozwijać
+  const [roomToExpand, setRoomToExpand] = useState(null)
 
   // Scroll to top przy każdej zmianie strony
   useEffect(() => {
@@ -24,19 +24,27 @@ export default function CustomerApp() {
     })
   }, [currentPage])
 
+  // Rozszerzona funkcja do nawigacji z obsługą roomId
+  const handleNavigate = (page, roomId = null) => {
+    if (roomId) {
+      setRoomToExpand(roomId); // Zapamiętaj który pokój rozwijać
+    }
+    setCurrentPage(page);
+  };
+
   // Funkcja do przejścia do strony Rooms z rozwiniętym pokojem
   const handleNavigateToRoomDetails = (roomId) => {
-    setRoomToExpand(roomId); // Zapamiętaj który pokój ma być rozwinięty
-    setCurrentPage('roomsPage'); // Przejdź do strony Rooms
+    setRoomToExpand(roomId);
+    setCurrentPage('roomsPage');
   };
 
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage />
+        return <HomePage onNavigate={handleNavigate} /> // Przekazuj funkcję nawigacji
 
       case 'roomsPage':
-        return <Rooms roomToExpand={roomToExpand} /> // Przekaż roomToExpand do komponentu Rooms
+        return <Rooms roomToExpand={roomToExpand} />
 
       case 'rooms':
         return (
@@ -46,7 +54,7 @@ export default function CustomerApp() {
               setCurrentPage('booking')
             }}
             onBack={() => setCurrentPage('home')}
-            onNavigateToRoomDetails={handleNavigateToRoomDetails} // Przekaż funkcję
+            onNavigateToRoomDetails={handleNavigateToRoomDetails}
           />
         )
 
@@ -86,14 +94,14 @@ export default function CustomerApp() {
         case 'Cont':
           return <Contact />
       default:
-        return <HomePage />
+        return <HomePage onNavigate={handleNavigate} />
     }
   }
 
   return (
     <>
       <NavMenu 
-        onNavigate={(page) => setCurrentPage(page)}
+        onNavigate={(page) => handleNavigate(page)}
         onBookNow={() => setCurrentPage('rooms')}
       />
           
@@ -109,7 +117,7 @@ export default function CustomerApp() {
       >
         {renderPage()}
         <Footer 
-          onNavigate={(page) => setCurrentPage(page)}
+          onNavigate={(page) => handleNavigate(page)}
           onBookNow={() => setCurrentPage('rooms')}
         />
       </div>

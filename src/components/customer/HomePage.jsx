@@ -1,29 +1,38 @@
 // src/components/customer/HomePage.jsx
-export default function HomePage() {
+export default function HomePage({ onNavigate }) {
   const rooms = [
     {
       title: "POKÓJ CLASSIC",
       image: "/pokoj1.jpg",
+      roomId: "classic"
     },
     {
       title: "POKÓJ DELUXE",
       image: "/pokoj2.jpg",
+      roomId: "deluxe"
     },
     {
       title: "APARTAMENT PAŁACOWY",
       image: "/pokoj3.jpg",
+      roomId: "palace"
     },
     {
       title: "APARTAMENT DELUXE",
       image: "/pokoj4.jpg",
+      roomId: "aptDeluxe"
     },
   ];
 
-  const goToRooms = () => {
-    const section = document.getElementById("nasze-pokoje");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+  // Funkcja do przejścia do strony pokoi
+  const goToRooms = (roomId = null) => {
+    if (onNavigate) {
+      onNavigate('roomsPage', roomId); // Przekazujemy roomId opcjonalnie
     }
+  };
+
+  // Funkcja dla konkretnego pokoju
+  const handleRoomClick = (room) => {
+    goToRooms(room.roomId);
   };
 
   return (
@@ -79,7 +88,7 @@ export default function HomePage() {
         </div>
       </section>
 
-            {/* O HOTELU – HISTORIA + SKRÓT */}
+      {/* O HOTELU – HISTORIA + SKRÓT */}
       <section className="py-24 border-t border-black/10">
         <div className="max-w-6xl mx-auto px-6 text-center">
 
@@ -96,7 +105,7 @@ export default function HomePage() {
             elegancji i prawdziwego wypoczynku – z dala od zgiełku, a jednocześnie
             blisko natury.
           </p>
-
+          
           {/* Szybkie informacje
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
 
@@ -170,7 +179,7 @@ export default function HomePage() {
             {rooms.map((room, index) => (
               <button
                 key={index}
-                onClick={goToRooms}
+                onClick={() => handleRoomClick(room)}
                 className="group relative overflow-hidden border border-black/20"
               >
                 <img
