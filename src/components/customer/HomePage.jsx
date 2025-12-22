@@ -39,7 +39,7 @@ export default function HomePage() {
         }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-[#f7f5ef]/10" />
+        <div className="absolute inset-0 bg-[#f7f5ef]/1" />
 
         {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
@@ -75,6 +75,85 @@ export default function HomePage() {
                 strokeLinejoin="round"
               />
             </svg>
+          </div>
+        </div>
+      </section>
+
+            {/* O HOTELU – HISTORIA + SKRÓT */}
+      <section className="py-24 border-t border-black/10">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+
+          {/* Nagłówek */}
+          <h2 className="font-heading text-3xl md:text-4xl tracking-[0.25em] mb-10 text-[#7a6a3a]">
+            O NASZYM HOTELU
+          </h2>
+
+          {/* Opis */}
+          <p className="text-base md:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed mb-16">
+            Nasz hotel położony jest w sercu Mazur, na skraju Parku Krajobrazowego
+            Puszczy Boreckiej, zaledwie 200 metrów od brzegu jeziora Tajty.
+            To miejsce stworzone z myślą o gościach poszukujących harmonii,
+            elegancji i prawdziwego wypoczynku – z dala od zgiełku, a jednocześnie
+            blisko natury.
+          </p>
+
+          {/* Szybkie informacje
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+            <div>
+              <h3 className="font-heading tracking-widest text-sm mb-3 text-[#C9A24D]">
+                LOKALIZACJA
+              </h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Mazury, okolice jeziora Tajty <br />
+                200 m od linii brzegowej
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-heading tracking-widest text-sm mb-3 text-[#C9A24D]">
+                CHARAKTER
+              </h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Klasyczna elegancja <br />
+                Spokój, natura i komfort
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-heading tracking-widest text-sm mb-3 text-[#C9A24D]">
+                DLA KOGO
+              </h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Wypoczynek indywidualny <br />
+                Rodziny, pary i goście biznesowi
+              </p>
+            </div> */}
+
+          {/* </div> */}
+        </div>
+      </section>
+
+      {/* Restauracja */}
+      <section
+        className="py-32 border-t border-black/10"
+        style={{
+          backgroundImage: "url('/restauracja.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-[#f7f5ef]/10" />
+
+        {/* Content */}
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+          <h1 className="font-heading text-5xl md:text-5xl font-bold tracking-[0.18em] mb-6 text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
+            RESTAURACJA
+          </h1>
+          
+          <div className="flex justify-center mb-8">
+            <span className="h-px w-24 bg-[#1c2430]/60" />
           </div>
         </div>
       </section>
