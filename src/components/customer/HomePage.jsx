@@ -3,19 +3,19 @@ export default function HomePage() {
   const rooms = [
     {
       title: "POKÓJ CLASSIC",
-      image: "/public/pokoj1.jpg",
+      image: "/pokoj1.jpg",
     },
     {
       title: "POKÓJ DELUXE",
-      image: "/public/pokoj2.jpg",
+      image: "/pokoj2.jpg",
     },
     {
       title: "APARTAMENT PAŁACOWY",
-      image: "/public/pokoj3.jpg",
+      image: "/pokoj3.jpg",
     },
     {
       title: "APARTAMENT DELUXE",
-      image: "/public/pokoj4.jpg",
+      image: "/pokoj4.jpg",
     },
   ];
 
@@ -29,29 +29,43 @@ export default function HomePage() {
   return (
     <main className="w-full">
 
-      {/* HERO */}
-      <section className="min-h-screen pt-24 flex items-center justify-center">
-        <div className="text-center px-6 max-w-4xl mx-auto">
-          <h1 className="font-heading text-5xl md:text-7xl font-bold tracking-[0.18em] mb-6">
-            ZNOWU NIE DZIAŁA
+      {/* HERO Z OBRAZEM */}
+      <section
+        className="relative min-h-screen flex items-end justify-center"
+        style={{
+          backgroundImage: "url('/recepcja.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-[#f7f5ef]/10" />
+
+        {/* Content */}
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+          <h1 className="font-heading text-5xl md:text-7xl font-bold tracking-[0.18em] mb-6 text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
+            ZNOWU NIE
+            <br />
+            DZIAŁA
           </h1>
 
           <div className="flex justify-center mb-8">
-            <span className="h-px w-32 bg-black/70" />
+            <span className="h-px w-24 bg-[#1c2430]/60" />
           </div>
 
-          <p className="text-lg md:text-xl text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-white max-w-2xl mx-auto mb-14 leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
             Odkryj niezapomniane chwile w naszym ekskluzywnym hotelu.
             Klasyczna elegancja, luksusowe wnętrza i najwyższy komfort.
           </p>
 
+          {/* Strzałka */}
           <div className="flex justify-center">
             <svg
-              width="48"
-              height="48"
+              width="40"
+              height="40"
               viewBox="0 0 24 24"
               fill="none"
-              className="text-black/70 animate-bounce"
+              className="text-white animate-bounce"
             >
               <path
                 d="M6 9l6 6 6-6"
@@ -66,8 +80,8 @@ export default function HomePage() {
       </section>
 
       {/* POKOJE I APARTAMENTY */}
-      <section className="py-24 bg-[#f7f5ef]">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-24">
+        <div className="max-w-screen-2xl mx-auto px-6">
 
           <h2 className="text-center font-heading text-3xl md:text-4xl tracking-[0.25em] mb-16 text-[#7a6a3a]">
             POKOJE I APARTAMENTY
