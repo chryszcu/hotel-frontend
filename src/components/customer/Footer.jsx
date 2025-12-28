@@ -193,36 +193,6 @@ export default function Footer({ onNavigate, onBookNow }) {
               </p>
             </div>
           </div>
-
-          {/* Certyfikaty */}
-          <div className="mt-8 pt-6 border-t border-slate-300">
-            <div className="flex flex-wrap justify-center gap-6">
-              <div className="text-center">
-                <div className="border border-slate-300 w-16 h-16 rounded-full mx-auto mb-2 flex items-center justify-center text-slate-700">
-                  🌿
-                </div>
-                <p className="text-xs text-slate-600">Certyfikat Green Hotel</p>
-              </div>
-              <div className="text-center">
-                <div className="border border-slate-300 w-16 h-16 rounded-full mx-auto mb-2 flex items-center justify-center text-slate-700">
-                  ⭐
-                </div>
-                <p className="text-xs text-slate-600">4 gwiazdki</p>
-              </div>
-              <div className="text-center">
-                <div className="border border-slate-300 w-16 h-16 rounded-full mx-auto mb-2 flex items-center justify-center text-slate-700">
-                  🏆
-                </div>
-                <p className="text-xs text-slate-600">TripAdvisor 2025</p>
-              </div>
-              <div className="text-center">
-                <div className="border border-slate-300 w-16 h-16 rounded-full mx-auto mb-2 flex items-center justify-center text-slate-700">
-                  🔒
-                </div>
-                <p className="text-xs text-slate-600">Bezpieczne płatności</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </footer>
