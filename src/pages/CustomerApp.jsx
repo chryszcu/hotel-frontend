@@ -10,6 +10,7 @@ import Contact from '../components/customer/MenuPages/Contact'
 import Conferention from '../components/customer/MenuPages/Conferentions'
 import SPA from '../components/customer/MenuPages/SPA'
 import Footer from '../components/customer/Footer'
+import Restaurant from '../components/customer/MenuPages/Restaurant'
 
 export default function CustomerApp() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -65,6 +66,9 @@ export default function CustomerApp() {
             onNavigateToRoomDetails={handleNavigateToRoomDetails}
           />
         )
+      
+      case 'restaurant':
+        return <Restaurant />
 
       case 'booking':
         return (

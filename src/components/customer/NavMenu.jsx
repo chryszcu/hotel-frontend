@@ -1,4 +1,4 @@
-// src\components\customer\NavMenu.jsx
+// src/components/customer/NavMenu.jsx
 export default function Navbar({ onNavigate, onBookNow }) {
   return (
     <header className="w-full bg-white/90 backdrop-blur fixed top-0 left-0 z-50 border-b border-slate-200">
@@ -16,7 +16,7 @@ export default function Navbar({ onNavigate, onBookNow }) {
           />
         </div>
 
-        {/* Menu */}
+        {/* Menu - DODAJEMY "RESTAURACJA" */}
         <ul className="hidden md:flex items-center gap-10 font-heading text-sm tracking-[0.18em] uppercase text-slate-900">
           <li
             className="cursor-pointer hover:text-[#C9A24D] transition"
@@ -29,6 +29,12 @@ export default function Navbar({ onNavigate, onBookNow }) {
             onClick={() => onNavigate("roomsPage")}
           >
             Pokoje
+          </li>
+          <li
+            className="cursor-pointer hover:text-[#C9A24D] transition"
+            onClick={() => onNavigate("restaurant")}
+          >
+            Restauracja
           </li>
           <li
             className="cursor-pointer hover:text-[#C9A24D] transition"
