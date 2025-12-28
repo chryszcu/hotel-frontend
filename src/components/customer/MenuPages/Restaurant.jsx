@@ -14,7 +14,7 @@ export default function Restaurant() {
     {
       title: "DANIA GŁÓWNE",
       items: [
-        { name: "Dorsz z Patagonii", price: "89 zł", desc: "Z purée z kalafiora, szpinakiem i sosem maślano-koperkowym" },
+        { name: "Dorsz z Patagonii", price: "89 zł", desc: "Z purée z kalafiora, szspinakiem i sosem maślano-koperkowym" },
         { name: "Polędwica wołowa Black Angus", price: "128 zł", desc: "250g, z ziemniakami dauphinoise i sosem pieprzowym" },
         { name: "Kaczka z jabłkami", price: "98 zł", desc: "Confitura z udka, pierś z jabłkiem i sosem borówkowym" }
       ]
@@ -108,63 +108,133 @@ export default function Restaurant() {
           </div>
         </SlideUp>
 
-        {/* O restauracji */}
+        {/* O restauracji - NOWY UKŁAD Z 2 KOLUMNAMI */}
         <div className="mb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <SlideLeft delay={0.3}>
-              <div className="bg-white p-8 border border-slate-200 shadow-sm">
-                <h2 className="font-heading text-2xl font-semibold text-[#C9A24D] mb-6">
-                  FILOZOFIA KUCHNI
-                </h2>
-                <FadeIn delay={0.1}>
-                  <p className="text-slate-600 leading-relaxed mb-4">
-                    Nasza kuchnia to połączenie najlepszych lokalnych produktów 
-                    z technikami wywodzącymi się z francuskiej tradycji kulinarnej. 
-                    Wierzymy w sezonowość i współpracę z lokalnymi dostawcami.
-                  </p>
-                </FadeIn>
-                <SlideUp delay={0.2}>
-                  <ul className="text-slate-600 space-y-2 mt-6">
-                    {[
-                      "Produkty od lokalnych dostawców (promień 50km)",
-                      "Mięso z ekologicznych hodowli",
-                      "Ryby ze zrównoważonych połowów",
-                      "Warzywa i zioła z własnego ogrodu",
-                      "Wina z małych, rodzinnych winnic"
-                    ].map((item, index) => (
-                      <FadeIn key={index} delay={0.05 * index}>
-                        <li className="flex items-start">
-                          <span className="text-[#C9A24D] mr-2 mt-1">✓</span>
-                          {item}
-                        </li>
-                      </FadeIn>
-                    ))}
-                  </ul>
-                </SlideUp>
-              </div>
-            </SlideLeft>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            {/* LEWA KOLUMNA: Filozofia kuchni i Detale wnętrza (jedna pod drugą) */}
+            <div className="lg:col-span-1 space-y-8">
+              {/* Filozofia kuchni */}
+              <SlideLeft delay={0.3}>
+                <div className="bg-white p-8 border border-slate-200 shadow-sm h-full">
+                  <h2 className="font-heading text-2xl font-semibold text-[#C9A24D] mb-6">
+                    FILOZOFIA KUCHNI
+                  </h2>
+                  <FadeIn delay={0.1}>
+                    <p className="text-slate-600 leading-relaxed mb-4">
+                      Nasza kuchnia to połączenie najlepszych lokalnych produktów 
+                      z technikami wywodzącymi się z francuskiej tradycji kulinarnej. 
+                      Wierzymy w sezonowość i współpracę z lokalnymi dostawcami.
+                    </p>
+                  </FadeIn>
+                  <SlideUp delay={0.2}>
+                    <ul className="text-slate-600 space-y-2 mt-6">
+                      {[
+                        "Produkty od lokalnych dostawców (promień 50km)",
+                        "Mięso z ekologicznych hodowli",
+                        "Ryby ze zrównoważonych połowów",
+                        "Warzywa i zioła z własnego ogrodu",
+                        "Wina z małych, rodzinnych winnic"
+                      ].map((item, index) => (
+                        <FadeIn key={index} delay={0.05 * index}>
+                          <li className="flex items-start">
+                            <span className="text-[#C9A24D] mr-2 mt-1">✓</span>
+                            {item}
+                          </li>
+                        </FadeIn>
+                      ))}
+                    </ul>
+                  </SlideUp>
+                </div>
+              </SlideLeft>
 
-            <SlideRight delay={0.3}>
-              <div className="bg-white p-8 border border-slate-200 shadow-sm">
-                <FadeIn delay={0.1}>
-                  <div className="h-64 w-full bg-center bg-cover rounded-lg mb-6"
-                       style={{ backgroundImage: `url('/restauracja-szef.jpg')` }}>
+              {/* Detale wnętrza */}
+              <SlideLeft delay={0.4}>
+                <div className="bg-white border border-slate-200 shadow-sm overflow-hidden h-full">
+                  <div className="group relative h-48 w-full overflow-hidden">
+                    <div className="h-full w-full bg-center bg-cover transition-transform duration-500 group-hover:scale-105"
+                      style={{ backgroundImage: `url('/restauracja-detale.jpg')` }}>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                      <SlideUp delay={0.1}>
+                        <h3 className="text-white font-medium text-lg">Wystrój i detale</h3>
+                      </SlideUp>
+                      <FadeIn delay={0.2}>
+                        <p className="text-white/80 text-sm mt-2">Starannie dobrane elementy wystroju</p>
+                      </FadeIn>
+                    </div>
                   </div>
-                </FadeIn>
-                <SlideUp delay={0.2}>
-                  <h3 className="font-heading text-xl font-semibold text-[#C9A24D] mb-3">
-                    SZEF KUCHNI
-                  </h3>
-                </SlideUp>
-                <FadeIn delay={0.3}>
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    <strong>Jan Kowalski</strong> – zdobywca gwiazdki Michelin, 
-                    wcześniej szef kuchni w restauracjach w Paryżu i Nowym Jorku. 
-                    Jego pasją jest łączenie polskich smaków z francuską elegancją.
-                  </p>
-                </FadeIn>
-              </div>
-            </SlideRight>
+                  <div className="p-6">
+                    <SlideUp delay={0.2}>
+                      <h3 className="font-heading text-xl font-semibold text-[#C9A24D] mb-3">
+                        DETALE WNĘTRZA
+                      </h3>
+                    </SlideUp>
+                    <FadeIn delay={0.3}>
+                      <p className="text-slate-600 text-sm leading-relaxed">
+                        Nasza przestrzeń zaprojektowana przez uznanego architekta wnętrz.
+                        Antyczne meble, kryształowe żyrandole i ręcznie tkane dywany 
+                        tworzą klimat dawnej elegancji.
+                      </p>
+                    </FadeIn>
+                  </div>
+                </div>
+              </SlideLeft>
+            </div>
+
+            {/* PRAWA KOLUMNA: Szef kuchni (duże zdjęcie) */}
+            <div className="lg:col-span-2">
+              <SlideRight delay={0.3}>
+                <div className="bg-white p-8 border border-slate-200 shadow-sm h-full">
+                  <FadeIn delay={0.1}>
+                    <div className="h-[500px] w-full bg-center bg-cover rounded-lg mb-6"
+                         style={{ 
+                           backgroundImage: `url('/restauracja-szef.jpg')`,
+                           backgroundPosition: 'center 30%'
+                         }}>
+                    </div>
+                  </FadeIn>
+                  <SlideUp delay={0.2}>
+                    <h3 className="font-heading text-2xl font-semibold text-[#C9A24D] mb-4">
+                      SZEF KUCHNI
+                    </h3>
+                  </SlideUp>
+                  <FadeIn delay={0.3}>
+                    <div className="space-y-4">
+                      <p className="text-slate-600 leading-relaxed">
+                        <strong>Jan Kowalski</strong> – zdobywca gwiazdki Michelin, 
+                        wcześniej szef kuchni w restauracjach w Paryżu i Nowym Jorku. 
+                        Jego pasją jest łączenie polskich smaków z francuską elegancją.
+                      </p>
+                      <p className="text-slate-600 leading-relaxed">
+                        Absolwent prestiżowej szkoły kulinarnej Le Cordon Bleu w Paryżu. 
+                        Przez 5 lat pracował w 3-gwiazdkowej restauracji "L'Arpège", 
+                        gdzie doskonalił techniki sous-vide i molekularne.
+                      </p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                        <div>
+                          <h4 className="font-medium text-slate-900 mb-2">Specjalizacje:</h4>
+                          <ul className="text-slate-600 text-sm space-y-1">
+                            <li>• Kuchnia fusion polsko-francuska</li>
+                            <li>• Techniki sous-vide</li>
+                            <li>• Mięsa i ryby z grilla węglowego</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-slate-900 mb-2">Osiągnięcia:</h4>
+                          <ul className="text-slate-600 text-sm space-y-1">
+                            <li>• Gwiazdka Michelin (2024)</li>
+                            <li>• Chef of the Year 2023</li>
+                            <li>• 2 miejsce Bocuse d'Or Polska</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </FadeIn>
+                </div>
+              </SlideRight>
+            </div>
+            
           </div>
         </div>
 
