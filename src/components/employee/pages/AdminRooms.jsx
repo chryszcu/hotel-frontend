@@ -1,4 +1,4 @@
-// src/pages/AdminRooms.jsx (lub gdzie go trzymasz)
+// src\components\employee\pages\AdminRooms.jsx
 import React, { useState } from "react";
 import { useTableSearchSort } from "../hook/useTableSearchSort";
 

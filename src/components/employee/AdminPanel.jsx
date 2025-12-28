@@ -1,3 +1,4 @@
+// src\components\employee\AdminPanel.jsx
 import React, { useState } from "react";
 import AdminReservationSelector from "./pages/AdminReservationSelector";
 import AdminRoomCleaning from "./pages/AdminRoomCleaning";

@@ -1,3 +1,4 @@
+// src\pages\EmployeeApp.jsx
 import { useState } from "react";
 import AdminLogin from "../components/employee/Auth/AdminLogin"
 import AdminPanel from "../components/employee/AdminPanel"; // albo zmień nazwę pliku na AdminPanel.jsx

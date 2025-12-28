@@ -24,11 +24,16 @@ export default function CustomerApp() {
     })
   }, [currentPage])
 
-  // Rozszerzona funkcja do nawigacji z obsługą roomId
-  const handleNavigate = (page, roomId = null) => {
+  const handleNavigate = (page, roomId = null, roomData = null) => {
     if (roomId) {
-      setRoomToExpand(roomId); // Zapamiętaj który pokój rozwijać
+      setRoomToExpand(roomId);
     }
+    
+    // Jeśli przekazano dane pokoju, zapisz je
+    if (roomData) {
+      setSelectedRoom(roomData);
+    }
+    
     setCurrentPage(page);
   };
 
@@ -44,7 +49,10 @@ export default function CustomerApp() {
         return <HomePage onNavigate={handleNavigate} /> // Przekazuj funkcję nawigacji
 
       case 'roomsPage':
-        return <Rooms roomToExpand={roomToExpand} />
+        return <Rooms 
+          roomToExpand={roomToExpand}
+          onNavigate={handleNavigate} // Dodaj tę linię
+        />
 
       case 'rooms':
         return (

@@ -90,7 +90,7 @@ const rooms = [
   },
 ];
 
-export default function Rooms({ roomToExpand }) {
+export default function Rooms({ roomToExpand, onNavigate }) {
   const [openId, setOpenId] = useState(roomToExpand);
   const toggle = (id) => setOpenId((prev) => (prev === id ? null : id));
 
@@ -247,8 +247,16 @@ export default function Rooms({ roomToExpand }) {
                               className="flex-1 rounded-none bg-[#C9A24D] px-5 py-3 text-white font-semibold hover:bg-amber-700 transition"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                alert(`Wybrano: ${room.name}. Przechodzisz do rezerwacji.`);
-                                window.location.hash = 'rooms';
+                                const fullRoomData = rooms.find(r => r.id === room.id);
+                                
+                                if (onNavigate) {
+                                  // Przejdź do formularza rezerwacji z danymi pokoju
+                                  onNavigate('booking', null, fullRoomData);
+                                } else {
+                                  // Fallback - przekierowanie do RoomList
+                                  window.location.hash = 'rooms';
+                                  sessionStorage.setItem('selectedRoom', JSON.stringify(fullRoomData));
+                                }
                               }}
                             >
                               Zarezerwuj ten pokój

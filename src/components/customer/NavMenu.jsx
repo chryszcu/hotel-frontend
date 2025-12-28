@@ -1,3 +1,4 @@
+// src\components\customer\NavMenu.jsx
 export default function Navbar({ onNavigate, onBookNow }) {
   return (
     <header className="w-full bg-white/90 backdrop-blur fixed top-0 left-0 z-50 border-b border-slate-200">

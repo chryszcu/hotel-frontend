@@ -1,3 +1,4 @@
+// src\components\customer\BookingForm.jsx
 import { useState } from "react";
 import { FadeIn, SlideUp, SlideLeft } from "../animations";
 

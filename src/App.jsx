@@ -1,3 +1,4 @@
+//src\App.jsx
 import { useState, useEffect } from 'react'
 import CustomerApp from './pages/CustomerApp'
 import EmployeeApp from './pages/EmployeeApp'
