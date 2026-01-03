@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useTableSearchSort } from "../hook/useTableSearchSort";
 
-const membersData = [
+const initialMembersData = [
   {
     id: 1,
     name: "Dawid Dąbrowski",
@@ -47,9 +47,22 @@ const typeFilters = [
 ];
 
 const AdminMembers = () => {
+  // ✅ dane jako state, żeby dało się dopisywać
+  const [members, setMembers] = useState(initialMembersData);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [memberType, setMemberType] = useState("Gość");
   const [typeFilter, setTypeFilter] = useState("Wszyscy");
+
+  // ✅ formularz + hasło
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    status: "Aktywny",
+  });
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
 
   const {
     search,
@@ -58,15 +71,8 @@ const AdminMembers = () => {
     data: sortedData,
     renderSortIcon,
   } = useTableSearchSort({
-    data: membersData,
-    searchableFields: [
-      "name",
-      "email",
-      "type",
-      "status",
-      "lastStay",
-      "reservations",
-    ],
+    data: members,
+    searchableFields: ["name", "email", "type", "status", "lastStay", "reservations"],
     defaultSortKey: "name",
     defaultSortDirection: "asc",
   });
@@ -75,6 +81,63 @@ const AdminMembers = () => {
     typeFilter === "Wszyscy"
       ? sortedData
       : sortedData.filter((m) => m.type === typeFilter);
+
+  const openModal = () => {
+    setError("");
+    setForm({ name: "", email: "", status: "Aktywny" });
+    setMemberType("Gość");
+    setPassword("");
+    setShowPassword(false);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setError("");
+  };
+
+  const handleSave = () => {
+    setError("");
+
+    const name = form.name.trim();
+    const email = form.email.trim();
+
+    if (!name) {
+      setError("Podaj imię i nazwisko.");
+      return;
+    }
+    if (!email || !email.includes("@")) {
+      setError("Podaj poprawny adres e-mail.");
+      return;
+    }
+    if (password.length < 8) {
+      setError("Hasło musi mieć minimum 8 znaków.");
+      return;
+    }
+    if (members.some((m) => m.email.toLowerCase() === email.toLowerCase())) {
+      setError("Użytkownik z takim e-mailem już istnieje.");
+      return;
+    }
+
+    const nextId = members.length ? Math.max(...members.map((m) => m.id)) + 1 : 1;
+
+    const newMember = {
+      id: nextId,
+      name,
+      email,
+      type: memberType,
+      status: memberType === "Admin" ? "Wewnętrzny" : form.status,
+      lastStay: "–",
+      reservations: memberType === "Gość" ? 0 : "—",
+
+      // ⚠️ DEMO/PROJEKT: trzymamy hasło tylko żeby było w payloadzie (nie pokazujemy w tabeli)
+      // W realnym systemie hasło powinno iść do backendu i tam zostać zahashowane.
+      password,
+    };
+
+    setMembers((prev) => [...prev, newMember]);
+    setIsModalOpen(false);
+  };
 
   return (
     <section>
@@ -87,7 +150,7 @@ const AdminMembers = () => {
         </div>
 
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={openModal}
           className="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-sm font-medium text-white transition"
         >
           + Dodaj członka
@@ -198,15 +261,9 @@ const AdminMembers = () => {
                   key={member.id}
                   className="border-t border-slate-700/60 hover:bg-slate-800/70 transition"
                 >
-                  <td className="px-4 py-3 text-slate-100">
-                    {member.name}
-                  </td>
-                  <td className="px-4 py-3 text-slate-300">
-                    {member.email}
-                  </td>
-                  <td className="px-4 py-3 text-slate-300">
-                    {member.type}
-                  </td>
+                  <td className="px-4 py-3 text-slate-100">{member.name}</td>
+                  <td className="px-4 py-3 text-slate-300">{member.email}</td>
+                  <td className="px-4 py-3 text-slate-300">{member.type}</td>
                   <td className="px-4 py-3">
                     <span
                       className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
@@ -216,9 +273,7 @@ const AdminMembers = () => {
                       {member.status}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-slate-300">
-                    {member.lastStay}
-                  </td>
+                  <td className="px-4 py-3 text-slate-300">{member.lastStay}</td>
                   <td className="px-4 py-3 text-right text-slate-100">
                     {member.reservations}
                   </td>
@@ -226,10 +281,7 @@ const AdminMembers = () => {
               ))
             ) : (
               <tr className="border-t border-slate-700/60">
-                <td
-                  colSpan="6"
-                  className="px-4 py-6 text-center text-slate-400 italic"
-                >
+                <td colSpan="6" className="px-4 py-6 text-center text-slate-400 italic">
                   Brak wyników.
                 </td>
               </tr>
@@ -250,23 +302,56 @@ const AdminMembers = () => {
           >
             <h2 className="text-xl font-semibold mb-4">Dodaj członka</h2>
 
+            {error && (
+              <div className="mb-3 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+                {error}
+              </div>
+            )}
+
             <input
               type="text"
               placeholder="Imię i nazwisko"
               className="w-full p-3 rounded bg-slate-700 placeholder-slate-400 text-white mb-3"
+              value={form.name}
+              onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
             />
 
             <input
               type="email"
               placeholder="E-mail"
               className="w-full p-3 rounded bg-slate-700 placeholder-slate-400 text-white mb-3"
+              value={form.email}
+              onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
             />
+
+            {/* Hasło + pokaż/ukryj */}
+            <div className="mb-3">
+              <label className="block text-sm mb-1 text-slate-300">Hasło</label>
+              <div className="flex gap-2">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Minimum 8 znaków"
+                  className="w-full p-3 rounded bg-slate-700 placeholder-slate-400 text-white"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  className="px-3 rounded bg-slate-700 hover:bg-slate-600 text-slate-100 text-sm"
+                  title={showPassword ? "Ukryj hasło" : "Pokaż hasło"}
+                >
+                  {showPassword ? "Ukryj" : "Pokaż"}
+                </button>
+              </div>
+              <p className="mt-2 text-xs text-slate-400">
+                Demo (frontend). W realnym systemie hasło powinno być obsłużone po stronie backendu.
+              </p>
+            </div>
 
             {/* Typ członka */}
             <div className="mb-4">
-              <label className="block text-sm mb-1 text-slate-300">
-                Typ członka
-              </label>
+              <label className="block text-sm mb-1 text-slate-300">Typ członka</label>
               <select
                 value={memberType}
                 onChange={(e) => setMemberType(e.target.value)}
@@ -278,15 +363,33 @@ const AdminMembers = () => {
               </select>
             </div>
 
+            {/* Status (opcjonalnie dla nie-adminów) */}
+            {memberType !== "Admin" && (
+              <div className="mb-4">
+                <label className="block text-sm mb-1 text-slate-300">Status</label>
+                <select
+                  value={form.status}
+                  onChange={(e) => setForm((p) => ({ ...p, status: e.target.value }))}
+                  className="w-full p-3 rounded bg-slate-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option>Aktywny</option>
+                  <option>Oczekuje</option>
+                </select>
+              </div>
+            )}
+
             <div className="flex justify-end gap-3 mt-4">
               <button
-                onClick={() => setIsModalOpen(false)}
+                onClick={closeModal}
                 className="px-4 py-2 rounded-lg bg-slate-600 hover:bg-slate-500 transition"
               >
                 Anuluj
               </button>
 
-              <button className="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 transition">
+              <button
+                onClick={handleSave}
+                className="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 transition text-white"
+              >
                 Zapisz
               </button>
             </div>
